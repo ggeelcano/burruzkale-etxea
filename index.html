@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burruzkale Etxea · Habitaciones turísticas en Orozko, Bizkaia</title>
+<meta name="description" content="Burruzkale Etxea, habitaciones turísticas en Orozko (Bizkaia). 4.8★ con 57 opiniones. Naturaleza, descanso y reserva directa por WhatsApp.">
+<link rel="canonical" href="https://burruzkaleetxea.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://burruzkaleetxea.com/">
+<meta property="og:title" content="Burruzkale Etxea · Orozko, Bizkaia">
+<meta property="og:description" content="Habitaciones turísticas en Orozko, Bizkaia. 4.8★ en Google.">
+<meta property="og:image" content="https://burruzkaleetxea.com/img/bk-01.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/eguzki.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Burruzkale Etxea",
+  "description": "Habitaciones turísticas en el centro de Orozko (Bizkaia), a las puertas del Parque Natural de Gorbeia.",
+  "url": "https://burruzkaleetxea.com/",
+  "image": "https://burruzkaleetxea.com/img/bk-01.jpg",
+  "telephone": "+34618129255",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Burruzkale Kalea, 10",
+    "addressLocality": "Orozko",
+    "addressRegion": "Bizkaia",
+    "postalCode": "48410",
+    "addressCountry": "ES"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 43.1062168, "longitude": -2.9131166 },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "57" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"¿Cómo reservo una habitación?","acceptedAnswer":{"@type":"Answer","text":"Elige tus fechas en el calendario de la sección de reservas y envíanos la solicitud por WhatsApp, o llámanos directamente. Te confirmamos disponibilidad el mismo día, sin compromiso."}},
+    {"@type":"Question","name":"¿Las habitaciones tienen baño privado?","acceptedAnswer":{"@type":"Answer","text":"Sí, todas nuestras habitaciones disponen de baño privado completamente reformado, con secador y amenities ecológicos."}},
+    {"@type":"Question","name":"¿Hay aparcamiento?","acceptedAnswer":{"@type":"Answer","text":"Sí, dispones de aparcamiento junto a la casa, muy cómodo para llegar con el equipaje o con las bicis."}},
+    {"@type":"Question","name":"¿Puedo desayunar o tomar café en la casa?","acceptedAnswer":{"@type":"Answer","text":"En la zona común tienes cafetera Nespresso con cápsulas para todos los clientes y microondas. Además, en tu habitación cuentas con hervidor de agua, infusiones y nevera."}},
+    {"@type":"Question","name":"¿Es buena base para hacer rutas por el Gorbeia?","acceptedAnswer":{"@type":"Answer","text":"Inmejorable. Estamos en el valle de Orozko, una de las principales puertas de entrada al Parque Natural del Gorbeia y al macizo de Itxina, con rutas para todos los niveles."}},
+    {"@type":"Question","name":"¿A qué hora puedo hacer el check-in?","acceptedAnswer":{"@type":"Answer","text":"Contamos con auto check-in: te enviamos todas las indicaciones por WhatsApp el mismo día de tu llegada. El check-out es antes de las 12:00 del mediodía."}}
+  ]
+}
+</script>
+<style>
+.bk-cal{background:var(--cream,#f6f1e7);border:1px solid var(--cream-2,#efe7d6);border-radius:14px;padding:14px;margin-bottom:14px}
+.bk-cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.bk-cal-title{font-weight:700;font-size:1rem;color:var(--green,#2f3d2f);text-transform:capitalize}
+.bk-nav{width:34px;height:34px;border:1px solid var(--gold,#b08d57);background:#fff;color:var(--gold,#b08d57);border-radius:9px;font-size:1.2rem;line-height:1;cursor:pointer;transition:.2s}
+.bk-nav:hover:not(:disabled){background:var(--gold,#b08d57);color:#fff}
+.bk-nav:disabled{opacity:.3;cursor:not-allowed}
+.bk-dow{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px}
+.bk-dow span{text-align:center;font-size:.72rem;font-weight:700;color:var(--muted,#6f6a5f);text-transform:uppercase}
+.bk-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.bk-day{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-size:.88rem;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:.12s;user-select:none}
+.bk-day:hover:not(.bk-dis):not(.bk-empty){background:var(--gold-light,#c9a877);color:#fff}
+.bk-day.bk-empty{cursor:default}
+.bk-day.bk-dis{color:#c7c0b2;cursor:not-allowed;text-decoration:line-through}
+.bk-day.bk-in,.bk-day.bk-out{background:var(--green,#2f3d2f);color:#fff;font-weight:700}
+.bk-day.bk-range{background:var(--gold-light,#c9a877);color:#fff;border-radius:0}
+.bk-day.bk-in{border-radius:8px 0 0 8px}
+.bk-day.bk-out{border-radius:0 8px 8px 0}
+.bk-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--green,#2f3d2f);color:#fff;border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:.92rem}
+.bk-summary .bk-nights{font-weight:700;color:var(--gold-light,#c9a877);white-space:nowrap}
+@media(max-width:480px){.bk-day{font-size:.8rem}}
+.rooms-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.room-card{background:#fff;border:1px solid var(--cream-2,#efe7d6);border-radius:var(--radius,18px);overflow:hidden;box-shadow:var(--shadow,0 24px 60px -28px rgba(38,36,31,.45));display:flex;flex-direction:column}
+.room-img{position:relative;height:250px}
+.room-img img{width:100%;height:100%;object-fit:cover}
+.room-tag{position:absolute;top:12px;left:12px;background:var(--green,#2f3d2f);color:#fff;font-size:.76rem;font-weight:600;padding:5px 12px;border-radius:30px}
+.room-body{padding:26px;display:flex;flex-direction:column;flex:1}
+.room-body h3{font-size:1.45rem;margin-bottom:8px;color:var(--green,#2f3d2f)}
+.room-body>p{color:var(--muted,#6f6a5f);font-size:.95rem;margin-bottom:14px}
+.room-feats{list-style:none;display:flex;flex-wrap:wrap;gap:8px 16px;margin:0 0 18px;padding:0}
+.room-feats li{font-size:.88rem;font-weight:500;color:var(--ink,#26241f)}
+.room-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;gap:12px}
+.room-price{font-weight:700;color:var(--gold,#b08d57);font-size:1.02rem}
+.room-price small{display:block;font-size:.72rem;color:var(--muted,#6f6a5f);font-weight:400}
+.room-btn{padding:11px 22px}
+@media(max-width:760px){.rooms-grid{grid-template-columns:1fr}}
+.zona{background:var(--cream-2,#efe7d6)}
+.zona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:20px}
+.zona-card{background:#fff;border-radius:16px;padding:28px 24px;box-shadow:0 18px 44px -28px rgba(38,36,31,.35);display:flex;flex-direction:column}
+.zona-card .znum{font-family:'Fraunces',Georgia,serif;font-size:2.6rem;font-weight:600;line-height:1;color:#cdbb95;margin-bottom:14px}
+.zona-card h4{font-family:'Fraunces',Georgia,serif;font-size:1.2rem;font-weight:600;color:var(--green,#2f3d2f);margin-bottom:10px}
+.zona-card p{color:var(--muted,#6f6a5f);font-size:.92rem;margin:0 0 16px}
+.zona-card .ztag{margin-top:auto;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold,#b08d57);font-weight:700}
+@media(max-width:900px){.zona-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.zona-grid{grid-template-columns:1fr}}
+.io-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.io-card{background:#fff;border:1px solid var(--cream-2,#efe7d6);border-radius:16px;padding:30px;box-shadow:0 14px 40px -26px rgba(38,36,31,.3)}
+.io-card .ico{font-size:1.8rem;margin-bottom:10px}
+.io-card h3{font-family:'Fraunces',Georgia,serif;font-size:1.3rem;font-weight:600;color:var(--green,#2f3d2f);margin-bottom:8px}
+.io-card p{color:var(--muted,#6f6a5f);font-size:.96rem}
+@media(max-width:680px){.io-grid{grid-template-columns:1fr}}
+.reviews-carousel{position:relative}
+.reviews-grid{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.reviews-grid::-webkit-scrollbar{height:7px}
+.reviews-grid::-webkit-scrollbar-track{background:transparent}
+.reviews-grid::-webkit-scrollbar-thumb{background:var(--gold-light,#c9a877);border-radius:10px}
+.reviews-grid .review{flex:0 0 360px;max-width:360px;scroll-snap-align:start}
+.rev-arrow{display:none;position:absolute;top:44%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:none;background:var(--green,#2f3d2f);color:#fff;font-size:1.6rem;line-height:1;cursor:pointer;box-shadow:0 6px 18px -6px rgba(0,0,0,.4);z-index:5;transition:.2s;place-items:center}
+.rev-arrow:hover{background:var(--gold,#b08d57)}
+.rev-prev{left:-12px}.rev-next{right:-12px}
+@media(max-width:480px){.reviews-grid .review{flex:0 0 85%;max-width:85%}}
+.brand{align-items:center}
+.brand .brandlogo{height:46px;width:46px;flex:none;object-fit:contain;background:#fff;border-radius:11px;padding:5px;box-shadow:0 3px 12px rgba(38,36,31,.12);display:block}
+.brand .name{align-self:center}
+.brand .name small{white-space:nowrap;letter-spacing:.2em}
+.langs{display:flex;gap:1px;margin-left:18px;border:1px solid rgba(255,255,255,.45);border-radius:30px;padding:3px;flex:none}
+header.scrolled .langs{border-color:rgba(38,36,31,.22)}
+.langs button{background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.04em;color:#fff;padding:5px 10px;border-radius:30px;transition:.2s;line-height:1}
+header.scrolled .langs button{color:var(--green,#2f3d2f)}
+.langs button.on{background:var(--gold,#b08d57);color:#fff!important}
+@media(max-width:600px){
+  .brand .brandlogo{height:40px;width:40px}
+  .brand .name{font-size:1.12rem}
+  .brand .name small{font-size:.52rem;letter-spacing:.12em}
+  .langs{margin-left:10px}
+  .langs button{padding:4px 7px;font-size:.66rem}
+}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold,#b08d57),var(--gold-light,#c9a877));z-index:300;transition:width .1s linear}
+.loader{position:fixed;inset:0;background:#1b2516;z-index:400;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;transition:opacity .7s ease,visibility .7s}
+.loader.done{opacity:0;visibility:hidden}
+.loader .mark{width:74px;height:74px;border-radius:50%;background:#fff;display:grid;place-items:center;animation:bkpulse 1.6s infinite;overflow:hidden}
+.loader .mark img{width:54px;height:54px;object-fit:contain}
+.loader span{color:#e9d9bd;font-size:.72rem;letter-spacing:.4em;text-transform:uppercase}
+@keyframes bkpulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(176,141,87,.5)}50%{transform:scale(1.06);box-shadow:0 0 0 18px rgba(176,141,87,0)}}
+.to-top{position:fixed;right:26px;bottom:26px;width:48px;height:48px;border-radius:50%;background:var(--green,#2f3d2f);color:var(--cream,#f6f1e7);border:none;font-size:1.1rem;cursor:pointer;opacity:0;visibility:hidden;transition:.35s ease;z-index:90;box-shadow:0 16px 44px -30px rgba(35,33,28,.5)}
+.to-top.show{opacity:1;visibility:visible}
+.to-top:hover{background:var(--gold,#b08d57);transform:translateY(-4px)}
+.hero-slides .slide{animation:none;opacity:0;transform:scale(1.06);transition:opacity 1.6s ease}
+.hero-slides .slide.on{opacity:1;animation:bkken 9s linear forwards}
+@keyframes bkken{from{transform:scale(1.06)}to{transform:scale(1.15)}}
+.hero-dots{position:absolute;right:38px;bottom:38px;z-index:3;display:flex;gap:10px}
+.hero-dots button{width:34px;height:4px;border-radius:4px;border:none;background:rgba(255,255,255,.35);cursor:pointer;transition:.3s;padding:0}
+.hero-dots button.on{background:var(--gold-light,#c9a877)}
+.marquee{background:var(--gold,#b08d57);color:#fff;overflow:hidden;padding:14px 0;white-space:nowrap}
+.marquee-track{display:inline-flex;gap:0;animation:bkscrollx 30s linear infinite}
+.marquee span{display:inline-flex;align-items:center;gap:18px;padding:0 18px;font-family:'Fraunces',Georgia,serif;font-size:1.02rem;letter-spacing:.04em}
+.marquee i{font-style:normal;opacity:.65;font-size:.7rem}
+@keyframes bkscrollx{to{transform:translateX(-50%)}}
+.stats-grid{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.stats-grid{grid-template-columns:repeat(2,1fr);gap:24px 10px}}
+.faq-list{max-width:780px;margin:0 auto;display:grid;gap:14px}
+.faq{background:#fff;border:1px solid var(--cream-2,#efe7d6);border-radius:16px;overflow:hidden;transition:.3s}
+.faq summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 26px;cursor:pointer;font-weight:600;font-size:1.02rem;color:var(--green,#2f3d2f)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .pl{width:30px;height:30px;border-radius:50%;background:var(--cream,#f6f1e7);color:var(--gold,#b08d57);display:grid;place-items:center;font-size:1.2rem;flex:none;transition:.3s ease;font-weight:400}
+.faq[open] summary .pl{transform:rotate(45deg);background:var(--gold,#b08d57);color:#fff}
+.faq .ans{padding:0 26px 24px;color:var(--muted,#6f6a5f);font-size:.96rem}
+.bk-day{position:relative}
+.bk-day.bk-today::after{content:'';position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--gold,#b08d57)}
+.bk-clear{background:none;border:none;color:rgba(255,255,255,.7);font-size:.78rem;cursor:pointer;text-decoration:underline;display:none;font-family:'Inter',sans-serif;padding:0;margin-left:8px}
+.bk-clear.show{display:inline}
+.bk-clear:hover{color:#fff}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;font-size:1.5rem;cursor:pointer;transition:.25s;display:grid;place-items:center;z-index:201}
+.lb-nav:hover{background:var(--gold,#b08d57);border-color:var(--gold,#b08d57)}
+.lb-prev{left:26px}.lb-next{right:26px}
+.lb-count{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.75);font-size:.85rem;letter-spacing:.14em}
+@media(max-width:600px){
+  .hero-dots{right:24px;bottom:24px}
+  .lb-nav{width:42px;height:42px}.lb-prev{left:10px}.lb-next{right:10px}
+}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader"><div class="mark"><img src="img/logo-mark.png" alt="Burruzkale Etxea"></div><span>Burruzkale Etxea</span></div>
+<div class="progress" id="progress"></div>
+
+<header id="header"><div class="wrap nav">
+  <a href="#inicio" class="brand"><img class="brandlogo" src="img/logo-mark.png" alt="Burruzkale Etxea"><span class="name">Burruzkale Etxea<small data-i18n="brandSub">Habitaciones turísticas</small></span></a>
+  <nav class="menu" id="menu">
+    <a href="#casa" data-i18n="navCasa">La Casa</a>
+    <a href="#galeria" data-i18n="navGaleria">Galería</a>
+    <a href="#opiniones" data-i18n="navOpiniones">Opiniones</a>
+    <a href="#ubicacion" data-i18n="navUbicacion">Ubicación</a>
+    <a href="#reservar" class="btn btn-primary nav-cta" data-i18n="navReservar">Reservar</a>
+  </nav>
+  <div class="langs" id="langs">
+    <button type="button" data-lang="es">ES</button>
+    <button type="button" data-lang="eu">EU</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+  <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+</div></header>
+
+<section class="hero" id="inicio">
+  <div class="hero-slides" id="heroSlides">
+    <div class="slide on" style="background-image:url('https://lh3.googleusercontent.com/place-photos/AJRVUZMMnPRa8pVyZxCHRaLTQeGeiuflZWkoppxCC7B5MsTtTxKG6Px0ZljMOneyt6KjAfL5VBxjhm95sAyevLV_yiviGszn9R0xXZR-O6DOIj67P-CShMwjBWT1sXVkYeMFf1wftNzfl10pWASqIQ=s4800-w1920')"></div>
+    <div class="slide" style="background-image:url('https://lh3.googleusercontent.com/place-photos/AJRVUZOnB2oPPto6vrHtNZBSpZzbm2Fm-m_nemfhVDLtMDi917x_gRLw_KSQfHBhyBxNZXt5ECXhSvfwD88E0_P2ezPN49o3ehSOl3SZoN6VuKDjSuPzkkB9ZpWVdpFM6_XiD7MvI3hZn2y1ahPBIA=s4800-w1920')"></div>
+    <div class="slide" style="background-image:url('https://lh3.googleusercontent.com/place-photos/AJRVUZMGs6SbeiM9KoAjyuCsoo-a2qy2XpUtiSw_Sgt1LcHvgziQCe0pxeo7hT_G5M3sOxNyEGGxD_9UilUNXejNnZm-VwySpMKsn8VYc6XxCyl79Za_1iXYEd4fTbfp7Vs1_ijmy29vPmZnTuSMLg=s4800-w1920')"></div>
+    <div class="slide" style="background-image:url('https://lh3.googleusercontent.com/place-photos/AJRVUZOXZtYzx33ZUxbn88lzbD_bBmk25Zfn7KOBS7YH9AhpLdu7ymiCd_wyP0ni731ALuLZP5vgVvTQs80ynEqet_o2bmGqOE1euofkl51UNM33jmFbUA-TL0vs_pKy7zdn91jMh99noHKyjHrcrKE=s4800-w1920')"></div>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow" style="color:var(--gold-light)">Orozko · Bizkaia</div>
+    <h1 data-i18n="heroH1">Tu escapada en <em>Orozko</em></h1>
+    <p data-i18n="heroP">Descansa entre montañas, disfruta del confort y vive la esencia de Orozko.</p>
+    <div class="hero-cta">
+      <a href="#reservar" class="btn btn-primary" data-i18n="ctaDisp">Consultar disponibilidad</a>
+      <a href="#galeria" class="btn btn-ghost" data-i18n="ctaDescubrir">Descubrir la casa</a>
+    </div>
+    <div class="hero-badges">
+      <div class="hero-badge"><span class="star">★</span> <span data-i18n="badgeRev">4.8/5 · 57 opiniones reales</span></div>
+      <div class="hero-badge" data-i18n="badgeCentro">📍 En pleno centro de Orozko</div>
+      <div class="hero-badge" data-i18n="badgeWa">💬 Reserva directa por WhatsApp</div>
+    </div>
+  </div>
+  <div class="hero-dots" id="heroDots"></div>
+  <div class="scroll-hint" data-i18n="scroll">Desliza<span>↓</span></div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+
+<div class="stats"><div class="wrap stats-grid">
+  <div class="stat"><div class="num" data-target="4.8" data-decimals="1" data-suffix="★">0</div><div class="lbl" data-i18n="statRating">Valoración en Google</div></div>
+  <div class="stat"><div class="num" data-target="57">0</div><div class="lbl" data-i18n="statReviews">Opiniones reales</div></div>
+  <div class="stat"><div class="num" data-target="5">0</div><div class="lbl" data-i18n="statRooms">Habitaciones con baño privado</div></div>
+  <div class="stat"><div class="num" style="font-size:1.8rem">20 min</div><div class="lbl" data-i18n="statBilbao">De Bilbao</div></div>
+</div></div>
+
+<section class="pad" id="casa"><div class="wrap split">
+  <div class="copy reveal">
+    <div class="eyebrow" data-i18n="casaEye">La casa</div>
+    <h2 data-i18n="casaH2">Tu refugio en Orozko</h2>
+    <p data-i18n="casaP1">Burruzkale Etxea somos unas habitaciones turísticas donde podrás desconectar de verdad. Descanso, encanto y el mejor trato, en el centro de Orozko, a las puertas del Parque Natural de Gorbeia.</p>
+    <p data-i18n="casaP2">Con una valoración de 4.8★ en Google, nuestros huéspedes destacan la tranquilidad, el entorno natural y el trato cercano. La casa familiar dispone además de un jardín con mesitas para disfrutarlo con el buen tiempo.</p>
+    <ul class="feature-list">
+      <li><i>✓</i> <span data-i18n="f1">En el centro de Orozko</span></li>
+      <li><i>✓</i> <span data-i18n="f2">Habitaciones reformadas</span></li>
+      <li><i>✓</i> <span data-i18n="f3">Geotermia y suelo radiante</span></li>
+      <li><i>✓</i> <span data-i18n="f4">Placas solares</span></li>
+      <li><i>✓</i> <span data-i18n="f5">Amenities ecológicos</span></li>
+      <li><i>✓</i> <span data-i18n="f6">WiFi gratuito</span></li>
+      <li><i>✓</i> <span data-i18n="f7">Aparcamiento</span></li>
+    </ul>
+  </div>
+  <div class="imgs reveal">
+    <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZOnB2oPPto6vrHtNZBSpZzbm2Fm-m_nemfhVDLtMDi917x_gRLw_KSQfHBhyBxNZXt5ECXhSvfwD88E0_P2ezPN49o3ehSOl3SZoN6VuKDjSuPzkkB9ZpWVdpFM6_XiD7MvI3hZn2y1ahPBIA=s4800-w1280" alt="Habitación de Burruzkale Etxea">
+    <img class="float" src="https://lh3.googleusercontent.com/place-photos/AJRVUZMGs6SbeiM9KoAjyuCsoo-a2qy2XpUtiSw_Sgt1LcHvgziQCe0pxeo7hT_G5M3sOxNyEGGxD_9UilUNXejNnZm-VwySpMKsn8VYc6XxCyl79Za_1iXYEd4fTbfp7Vs1_ijmy29vPmZnTuSMLg=s4800-w900" alt="Fachada de Burruzkale Etxea">
+  </div>
+</div></section>
+
+<section class="pad" id="nosotros"><div class="wrap" style="max-width:800px;text-align:center">
+  <div class="section-head center reveal" style="margin-bottom:24px"><div class="eyebrow" data-i18n="nosEye">Sobre nosotros</div><h2 data-i18n="nosH2">Turismo responsable</h2></div>
+  <p class="reveal" style="font-size:1.12rem;line-height:1.8;color:var(--muted,#6f6a5f)" data-i18n="nosP">En Burruzkale Etxea creemos en un turismo responsable. Unimos confort y privacidad con el respeto por la naturaleza gracias a nuestra climatización geotérmica, el suelo radiante y la energía solar. Un refugio donde queremos que te sientas como en casa.</p>
+</div></section>
+
+<section class="pad exterior" id="exterior"><div class="wrap">
+  <div class="section-head center reveal"><div class="eyebrow" data-i18n="extEye">El lugar</div><h2 data-i18n="extH2">Un vistazo a Burruzkale Etxea</h2><p data-i18n="extP">Imágenes reales del alojamiento y su entorno.</p></div>
+  <div class="show-grid reveal">
+        <figure class="big"><img src="img/bk-01.jpg" alt="Fachada de Burruzkale Etxea"><figcaption data-i18n="cap1">La casa de piedra</figcaption></figure>
+        <figure class=""><img src="img/bk-13.jpg" alt="Habitación con pared de piedra"><figcaption data-i18n="cap2">Habitaciones con encanto</figcaption></figure>
+        <figure class=""><img src="img/bk-23.jpg" alt="Baño de piedra"><figcaption data-i18n="cap3">Baños reformados</figcaption></figure>
+        <figure class=""><img src="img/bk-10.jpg" alt="Habitación con vistas"><figcaption data-i18n="cap4">Tu descanso</figcaption></figure>
+        <figure class=""><img src="img/bk-32.jpg" alt="Baño con vistas al pueblo"><figcaption data-i18n="cap5">Cada detalle</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="parallax" style="background-image:url('https://lh3.googleusercontent.com/place-photos/AJRVUZODfagF8HtpdPpjQYqgzRVdEmJtfBOgtz2JjO4NYcEphBaVqX1H8H4h60FEPABQ8hVgFazd2TmYGzeR9-c8IILzSjVzk_P9qQ56v4ZlYiAmsYSX7bbRb7UVF98j1Zr01tVai2937gIdqmF4kg=s4800-w1920')">
+  <div class="pq reveal">
+    <div class="eyebrow" data-i18n="parEye">La experiencia</div>
+    <h2 data-i18n="parH2">Desconecta entre <em>naturaleza</em>,<br>a tu ritmo y sin prisas</h2>
+    <a href="#reservar" class="btn btn-primary" data-i18n="parBtn">Quiero vivirlo</a>
+  </div>
+</section>
+
+<section class="pad amen"><div class="wrap">
+  <div class="section-head center reveal"><div class="eyebrow" style="color:var(--gold-light)" data-i18n="servEye">Servicios</div><h2 data-i18n="servH2">Todo preparado para ti</h2><p data-i18n="servP">Cada habitación está equipada para que tu estancia sea cómoda de principio a fin.</p></div>
+  <div class="amen-grid">
+        <div class="amen-card reveal"><div class="ico">📺</div><h4 data-i18n="s1t">TV</h4><p data-i18n="s1d">Televisión en todas las habitaciones.</p></div>
+        <div class="amen-card reveal"><div class="ico">🧊</div><h4 data-i18n="s2t">Nevera</h4><p data-i18n="s2d">Nevera en la habitación para tus bebidas.</p></div>
+        <div class="amen-card reveal"><div class="ico">🫖</div><h4 data-i18n="s3t">Hervidor e infusiones</h4><p data-i18n="s3d">Hervidor de agua con infusiones a tu disposición.</p></div>
+        <div class="amen-card reveal"><div class="ico">💇</div><h4 data-i18n="s4t">Secador de pelo</h4><p data-i18n="s4d">Secador en cada habitación.</p></div>
+        <div class="amen-card reveal"><div class="ico">🧴</div><h4 data-i18n="s5t">Amenities ecológicos</h4><p data-i18n="s5d">Gel de manos, gel de ducha y champú, todo ecológico.</p></div>
+        <div class="amen-card reveal"><div class="ico">👕</div><h4 data-i18n="s6t">Plancha</h4><p data-i18n="s6d">Disponible bajo petición.</p></div>
+        <div class="amen-card reveal"><div class="ico">☕</div><h4 data-i18n="s7t">Cafetera Nespresso</h4><p data-i18n="s7d">En la zona común, cápsulas para todos los clientes.</p></div>
+        <div class="amen-card reveal"><div class="ico">🍱</div><h4 data-i18n="s8t">Microondas</h4><p data-i18n="s8d">En la zona común, por si quieres calentar algo.</p></div>
+        <div class="amen-card reveal"><div class="ico">🌳</div><h4 data-i18n="s9t">Jardín</h4><p data-i18n="s9d">Jardín con mesitas para disfrutar con el buen tiempo.</p></div>
+  </div>
+</div></section>
+
+<section class="pad" id="sostenibilidad"><div class="wrap split">
+  <div class="imgs reveal">
+    <img src="img/bk-05.jpg" alt="Amenities ecológicos de Burruzkale Etxea">
+  </div>
+  <div class="copy reveal">
+    <div class="eyebrow" data-i18n="sosEye">Sostenibilidad</div>
+    <h2 data-i18n="sosH2">Comprometidos con el medio ambiente</h2>
+    <p data-i18n="sosP">Apostamos por la eficiencia energética y el respeto al entorno. Contamos con un sistema de geotermia mediante suelo radiante y placas solares, que nos permiten ofrecerte el máximo confort durante todo el año reduciendo el impacto ambiental.</p>
+    <ul class="feature-list">
+      <li><i>✓</i> <span data-i18n="sf1">Geotermia</span></li>
+      <li><i>✓</i> <span data-i18n="sf2">Suelo radiante</span></li>
+      <li><i>✓</i> <span data-i18n="sf3">Placas solares</span></li>
+      <li><i>✓</i> <span data-i18n="sf4">Eficiencia energética</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="pad" id="galeria"><div class="wrap">
+  <div class="section-head center reveal"><div class="eyebrow" data-i18n="galEye">Galería</div><h2 data-i18n="galH2">Mira cada detalle</h2><p data-i18n="galP">Fotografías reales de Burruzkale Etxea.</p></div>
+  <div class="gallery-grid reveal">
+      <img src="img/bk-01.jpg" alt="Fachada de Burruzkale Etxea">
+      <img src="img/bk-jardin-01.jpg" alt="Jardín de Burruzkale Etxea con tumbonas y flores">
+      <img src="img/bk-jardin-02.jpg" alt="Rincón con mesa en el jardín de Burruzkale Etxea">
+      <img src="img/bk-09.jpg" alt="Habitación con pared de piedra">
+      <img src="img/bk-13.jpg" alt="Habitación con vigas de madera">
+      <img src="img/bk-10.jpg" alt="Habitación con vistas">
+      <img src="img/bk-29.jpg" alt="Dormitorio con encanto">
+      <img src="img/bk-23.jpg" alt="Baño de piedra con doble lavabo">
+      <img src="img/bk-32.jpg" alt="Baño con balcón al pueblo">
+      <img src="img/bk-21.jpg" alt="Baño moderno con ducha">
+      <img src="img/bk-06.jpg" alt="Hervidor de agua e infusiones en la habitación">
+      <img src="img/bk-02.jpg" alt="Cafetera Nespresso en la zona común">
+      <img src="img/bk-04.jpg" alt="Escritorio con nevera en la habitación">
+  </div>
+</div></section>
+
+<section class="pad" id="opiniones"><div class="wrap">
+  <div class="section-head center reveal"><div class="eyebrow" data-i18n="opEye">Opiniones</div><h2 data-i18n="opH2">Lo que dicen quienes ya han venido</h2></div>
+  <div class="reviews-top reveal">
+    <div class="score-big"><div class="n">4.8</div><div class="stars">★★★★★</div><div class="src" data-i18n="opSrc">en Google · 57 opiniones</div></div>
+  </div>
+  <div class="reviews-carousel reveal">
+    <button type="button" class="rev-arrow rev-prev" id="revPrev" aria-label="Anterior">‹</button>
+    <div class="reviews-grid" id="reviewsTrack">
+      <div class="review"><div class="stars">★★★★★</div><p>“Fuimos este fin de semana y hemos estado súper a gusto. El pueblo de Orozko es muy bonito y la casa está muy bien situada. La habitación amplia y cómoda, el colchón muy bueno y el baño muy completo. Detalles como agua y pastitas, y cafetera a la entrada. Se nota que la dueña es muy detallista. ¡Repetiremos seguro!”</p><div class="who"><span class="av"><img src="https://lh3.googleusercontent.com/a/ACg8ocKAzFSJrvqo1y2WXuuRd1Nknm8CdusOPUwf6sVj1cp4cpxc1w=s128-c0x00000000-cc-rp-mo" alt="Marian Bezanilla"></span><div><b>M. Bezanilla</b><small>★★★★★</small></div></div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>“Este hospedaje tiene todas las comodidades: habitación amplia, ambiente rústico, silencioso y con una atmósfera excelente. El anfitrión muy amable, siempre presto a ayudar. Buena iluminación y ubicación. Definitivamente volvería.”</p><div class="who"><span class="av"><img src="https://lh3.googleusercontent.com/a-/ALV-UjXdub-5NfK87cHgW3OcS3ahGwmkbZ5IzQV_KZHJmYzev4wrLU1rLw=s128-c0x00000000-cc-rp-mo-ba4" alt="Mauricio Enriquez"></span><div><b>M. Enriquez</b><small>★★★★★</small></div></div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>“Habitación amplia y con todos los detalles: nevera, cafetera e infusiones con bombones en la recepción y agua de cortesía. Buenas almohadas y cama cómoda. Todo reformado.”</p><div class="who"><span class="av"><img src="https://lh3.googleusercontent.com/a/ACg8ocJHqLdjK0v8WdQpOl_skCghiESeR0dJ7tpQTcGLasY9g4aZgw=s128-c0x00000000-cc-rp-mo-ba2" alt="Carol Obiols García"></span><div><b>C. Obiols García</b><small>★★★★★</small></div></div></div>
+    </div>
+    <button type="button" class="rev-arrow rev-next" id="revNext" aria-label="Siguiente">›</button>
+  </div>
+</div></section>
+
+<section class="pad" id="orozko"><div class="wrap split">
+  <div class="copy reveal">
+    <div class="eyebrow" data-i18n="oroEye">El municipio</div>
+    <h2 data-i18n="oroH2">Orozko, valle verde de Bizkaia</h2>
+    <p data-i18n="oroP1">Orozko es un valle tranquilo en el corazón de Bizkaia, atravesado por los ríos Altube y Arnauri y rodeado de montañas, bosques y caseríos. Su casco, donde estamos nosotros, reúne los servicios del pueblo y conserva el encanto de la vida del valle.</p>
+    <p data-i18n="oroP2">Puerta del Parque Natural de Gorbeia, esconde rincones como la cueva de Supelegor —legendaria por sus brujas y lamias—, la Torre de Aranguren del siglo XVI o el Museo Etnográfico del valle. Naturaleza, patrimonio y tradición vasca a tu alcance.</p>
+  </div>
+  <div class="imgs reveal">
+    <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZNUn9_U1lj8-lqR0bqytl9hmS2kUQE6XtkCpNV3L7um581V5KjC0g_ZWLDI8PsmpW0DfFdEOcVHetOLN9pFKARb6HNYsoMu-VTjNMfRrpEM6R82yUyRG4m2PCnJJG7hASJ54jP7e1hyM9vRQA=s4800-w1280" alt="Plaza del centro de Orozko">
+    <img class="float" src="https://lh3.googleusercontent.com/place-photos/AJRVUZOXZtYzx33ZUxbn88lzbD_bBmk25Zfn7KOBS7YH9AhpLdu7ymiCd_wyP0ni731ALuLZP5vgVvTQs80ynEqet_o2bmGqOE1euofkl51UNM33jmFbUA-TL0vs_pKy7zdn91jMh99noHKyjHrcrKE=s4800-w900" alt="Río a su paso por Orozko">
+  </div>
+</div></section>
+
+<section class="pad zona" id="zona"><div class="wrap">
+  <div class="section-head center reveal"><div class="eyebrow" data-i18n="zonaEye">La zona</div><h2 data-i18n="zonaH2">Qué hacer cerca de <em>la casa</em></h2><p data-i18n="zonaP">El valle de Orozko es la puerta de entrada al Gorbeia: rutas, naturaleza y cultura a un paso.</p></div>
+  <div class="zona-grid">
+    <div class="zona-card reveal"><div class="znum">01</div><h4 data-i18n="z1t">Parque Natural del Gorbeia</h4><p data-i18n="z1d">Rutas de senderismo para todos los niveles en el parque natural más extenso de Euskadi, con el monte Gorbeia y su mítica cruz.</p><div class="ztag" data-i18n="z1tag">A los pies de la casa</div></div>
+    <div class="zona-card reveal"><div class="znum">02</div><h4 data-i18n="z2t">Macizo de Itxina</h4><p data-i18n="z2d">Espectacular laberinto kárstico declarado Biotopo Protegido. El ojo de Atxular es una de las estampas más famosas de Bizkaia.</p><div class="ztag" data-i18n="z2tag">Desde Orozko</div></div>
+    <div class="zona-card reveal"><div class="znum">03</div><h4 data-i18n="z3t">Salto del Nervión</h4><p data-i18n="z3d">La cascada más alta de la Península Ibérica (222 m), espectacular tras la lluvia. Mirador y rutas por el cañón de Delika y Monte Santiago.</p><div class="ztag" data-i18n="z3tag">~30 min en coche</div></div>
+    <div class="zona-card reveal"><div class="znum">04</div><h4 data-i18n="z4t">Valle de Orozko</h4><p data-i18n="z4d">Pasea por sus barrios rurales, caseríos y ermitas, y acércate al museo etnográfico del valle para conocer su historia.</p><div class="ztag" data-i18n="z4tag">Estás en él</div></div>
+    <div class="zona-card reveal"><div class="znum">05</div><h4 data-i18n="z5t">Bilbao y alrededores</h4><p data-i18n="z5d">Museo Guggenheim, Casco Viejo y toda la oferta de la capital vizcaína a media hora en coche. Vitoria-Gasteiz también muy cerca.</p><div class="ztag" data-i18n="z5tag">~20 min en coche</div></div>
+    <div class="zona-card reveal"><div class="znum">06</div><h4 data-i18n="z6t">Costa de Bizkaia</h4><p data-i18n="z6d">Las playas de la costa vizcaína a media hora en coche: combina monte y mar en la misma escapada.</p><div class="ztag" data-i18n="z6tag">~30 min en coche</div></div>
+  </div>
+</div></section>
+
+<section class="pad loc" id="ubicacion"><div class="wrap loc-grid">
+  <div class="loc-copy reveal">
+    <div class="eyebrow" style="color:var(--gold-light)" data-i18n="ubiEye">Ubicación</div>
+    <h2 data-i18n="ubiH2">Naturaleza y comodidad en el corazón de Orozko</h2>
+    <p data-i18n="ubiP1"><strong>Estamos en pleno centro de Orozko</strong>, a pocos pasos de restaurantes, supermercados, farmacia y transporte público (Bizkaibus), a 7 minutos en coche de la estación de tren y a un paso de las principales rutas del Parque Natural de Gorbeia.</p>
+    <p data-i18n="ubiP2">Queremos que disfrutes de la tranquilidad de un entorno rural sin renunciar a las comodidades del día a día.</p>
+    <p style="margin-top:10px;font-size:.95rem"><strong style="color:var(--gold-light)" data-i18n="addrLabel">Dirección:</strong> Burruzkale Kalea, 10, 48410 Orozko, Bizkaia</p>
+    <a href="https://www.google.com/maps/search/?api=1&query=43.1062168,-2.9131166" target="_blank" class="btn btn-primary" style="margin-top:24px" data-i18n="ubiBtn">Abrir en Google Maps</a>
+  </div>
+  <div class="loc-map reveal"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=43.1062168,-2.9131166&output=embed"></iframe></div>
+</div></section>
+
+<section class="pad" id="habitaciones"><div class="wrap">
+  <div class="section-head center reveal"><div class="eyebrow" data-i18n="habEye">Habitaciones</div><h2 data-i18n="habH2">Elige tu habitación</h2><p data-i18n="habP">Dos tipos de habitación para que elijas la que mejor se adapta a tu escapada.</p></div>
+  <div class="rooms-grid">
+    <div class="room-card reveal">
+      <div class="room-img"><img src="img/bk-10.jpg" alt="Habitación Estándar de Burruzkale Etxea"><span class="room-tag" data-i18n="r1tag">3 disponibles</span></div>
+      <div class="room-body">
+        <h3 data-i18n="r1t">Habitación Estándar</h3>
+        <p data-i18n="r1d">Habitaciones acogedoras con pared de piedra y vigas de madera, baño privado y todo el equipamiento. Perfectas para una escapada en pareja.</p>
+        <ul class="room-feats"><li data-i18n="rfPers">👥 Hasta 2 personas</li><li data-i18n="rfBath">🚿 Baño privado</li><li data-i18n="rfTv">📺 TV · 🧊 Nevera</li></ul>
+        <div class="room-foot"><span class="room-price" data-i18n="roomPrice">Consúltanos<small>según fechas</small></span><button type="button" class="btn btn-primary room-btn" data-idx="0" data-i18n="btnReservar">Reservar</button></div>
+      </div>
+    </div>
+    <div class="room-card reveal">
+      <div class="room-img"><img src="img/bk-29.jpg" alt="Habitación Superior de Burruzkale Etxea"><span class="room-tag" data-i18n="r2tag">2 disponibles</span></div>
+      <div class="room-body">
+        <h3 data-i18n="r2t">Habitación Superior</h3>
+        <p data-i18n="r2d">Nuestras habitaciones más amplias, con más espacio y luz, pared de piedra y vigas. Ideales para disfrutar con la máxima comodidad.</p>
+        <ul class="room-feats"><li data-i18n="rfPers">👥 Hasta 2 personas</li><li data-i18n="rfBath">🚿 Baño privado</li><li data-i18n="rfTv">📺 TV · 🧊 Nevera</li></ul>
+        <div class="room-foot"><span class="room-price" data-i18n="roomPrice">Consúltanos<small>según fechas</small></span><button type="button" class="btn btn-primary room-btn" data-idx="1" data-i18n="btnReservar">Reservar</button></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="pad" id="checkin"><div class="wrap">
+  <div class="section-head center reveal"><div class="eyebrow" data-i18n="ciEye">Llegadas y salidas</div><h2 data-i18n="ciH2">Check-in y check-out</h2></div>
+  <div class="io-grid">
+    <div class="io-card reveal"><div class="ico">🔑</div><h3 data-i18n="ciInT">Llegadas (Check-in)</h3><p data-i18n="ciInP">Queremos que tu entrada sea rápida y cómoda, por eso contamos con auto check-in. Te enviaremos todas las indicaciones por WhatsApp el mismo día de tu llegada. Y si necesitas ayuda, estaremos encantados de atenderte en los teléfonos: 618 12 92 55 | 659 06 24 80.</p></div>
+    <div class="io-card reveal"><div class="ico">🧳</div><h3 data-i18n="ciOutT">Salidas (Check-out)</h3><p data-i18n="ciOutP">Para que todo funcione con comodidad, te pedimos dejar la habitación antes de las 12:00 h del mediodía.</p></div>
+  </div>
+</div></section>
+
+<section class="pad" id="faq"><div class="wrap">
+  <div class="section-head center reveal"><div class="eyebrow" data-i18n="faqEye">Preguntas frecuentes</div><h2 data-i18n="faqH2">Resolvemos tus dudas</h2></div>
+  <div class="faq-list reveal">
+    <details class="faq"><summary><span data-i18n="q1">¿Cómo reservo una habitación?</span><span class="pl">+</span></summary><div class="ans" data-i18n="a1">Elige tus fechas en el calendario de la sección de reservas y envíanos la solicitud por WhatsApp, o llámanos directamente. Te confirmamos disponibilidad el mismo día, sin compromiso.</div></details>
+    <details class="faq"><summary><span data-i18n="q2">¿Las habitaciones tienen baño privado?</span><span class="pl">+</span></summary><div class="ans" data-i18n="a2">Sí, todas nuestras habitaciones disponen de baño privado completamente reformado, con secador y amenities ecológicos.</div></details>
+    <details class="faq"><summary><span data-i18n="q3">¿Hay aparcamiento?</span><span class="pl">+</span></summary><div class="ans" data-i18n="a3">Sí, dispones de aparcamiento junto a la casa, muy cómodo para llegar con el equipaje o con las bicis.</div></details>
+    <details class="faq"><summary><span data-i18n="q4">¿Puedo desayunar o tomar café en la casa?</span><span class="pl">+</span></summary><div class="ans" data-i18n="a4">En la zona común tienes cafetera Nespresso con cápsulas para todos los clientes y microondas. Además, en tu habitación cuentas con hervidor de agua, infusiones y nevera.</div></details>
+    <details class="faq"><summary><span data-i18n="q5">¿Es buena base para hacer rutas por el Gorbeia?</span><span class="pl">+</span></summary><div class="ans" data-i18n="a5">Inmejorable. Estamos en el valle de Orozko, una de las principales puertas de entrada al Parque Natural del Gorbeia y al macizo de Itxina, con rutas para todos los niveles.</div></details>
+    <details class="faq"><summary><span data-i18n="q6">¿A qué hora puedo hacer el check-in?</span><span class="pl">+</span></summary><div class="ans" data-i18n="a6">Contamos con auto check-in: te enviamos todas las indicaciones por WhatsApp el mismo día de tu llegada. El check-out es antes de las 12:00 del mediodía.</div></details>
+  </div>
+</div></section>
+
+<section class="pad" id="reservar"><div class="wrap contact-grid">
+  <div class="contact-info reveal">
+    <div class="eyebrow" data-i18n="resEye">Reservas</div>
+    <h2 data-i18n="resH2">Reserva tu estancia</h2>
+    <p data-i18n="resP">Cuéntanos tus fechas y te confirmamos disponibilidad sin compromiso. Atendemos personalmente cada solicitud.</p>
+    <ul class="ci-list">
+      <li><div class="ico">📞</div><div><b data-i18n="ciTel">Teléfono</b><a href="tel:+34618129255">+34 618 12 92 55</a> · <a href="tel:+34659062480">+34 659 06 24 80</a></div></li>
+      <li><div class="ico">💬</div><div><b>WhatsApp</b><a href="https://wa.me/34618129255" target="_blank">+34 618 12 92 55</a> · <a href="https://wa.me/34659062480" target="_blank">+34 659 06 24 80</a></div></li>
+      <li><div class="ico">📍</div><div><b data-i18n="ciDir">Dirección</b><span>Burruzkale Kalea, 10, 48410 Orozko, Bizkaia</span></div></li>
+    </ul>
+    <a href="https://wa.me/34618129255?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20disponibilidad%20en%20Burruzkale%20Etxea" target="_blank" class="btn btn-wa" data-i18n="btnWa">💬 Reservar por WhatsApp</a>
+  </div>
+  <form class="form reveal" id="bookForm" data-wa="34618129255" data-name="Burruzkale Etxea">
+    <h3 data-i18n="formH3">Reserva tu estancia</h3>
+    <p class="sub" data-i18n="formSub">Elige tus fechas en el calendario y te confirmamos disponibilidad sin compromiso.</p>
+    <div class="bk-cal" id="bkCal">
+      <div class="bk-cal-head">
+        <button type="button" class="bk-nav" id="bkPrev" aria-label="Mes anterior">‹</button>
+        <div class="bk-cal-title" id="bkTitle">—</div>
+        <button type="button" class="bk-nav" id="bkNext" aria-label="Mes siguiente">›</button>
+      </div>
+      <div class="bk-dow" id="bkDow"></div>
+      <div class="bk-grid" id="bkGrid"></div>
+    </div>
+    <div class="bk-summary" id="bkSummary">
+      <div class="bk-sum-dates"><span id="bkInfo">Selecciona tu fecha de entrada</span> <button type="button" class="bk-clear" id="bkClear" data-i18n="_clear">borrar</button></div>
+      <div class="bk-nights" id="bkNights"></div>
+    </div>
+    <input type="hidden" id="entrada"><input type="hidden" id="salida">
+    <div class="field"><label for="nombre" data-i18n="lblNombre">Nombre</label><input type="text" id="nombre" data-i18n-ph="phNombre" placeholder="Tu nombre" required></div>
+    <div class="field-row">
+      <div class="field"><label for="habitacion" data-i18n="lblHab">Habitación</label><select id="habitacion"><option data-i18n="optEstandar">Habitación Estándar</option><option data-i18n="optSuperior">Habitación Superior</option><option data-i18n="optIndif">Indiferente</option></select></div>
+      <div class="field"><label for="personas" data-i18n="lblPersonas">Personas</label><select id="personas"><option data-i18n="opt1p">1 persona</option><option selected data-i18n="opt2p">2 personas</option></select></div>
+    </div>
+    <div class="field"><label for="tel" data-i18n="lblTel">Tu teléfono</label><input type="tel" id="tel" placeholder="6XX XXX XXX"></div>
+    <div class="field"><label for="msg" data-i18n="lblMsg">Mensaje (opcional)</label><textarea id="msg" rows="2" data-i18n-ph="phMsg" placeholder="¿Algún detalle que debamos saber?"></textarea></div>
+    <button type="submit" class="btn btn-primary" data-i18n="btnSubmit">Solicitar reserva por WhatsApp</button>
+    <p class="form-note" data-i18n="formNote">Sin compromiso · Te confirmamos disponibilidad el mismo día</p>
+  </form>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="foot-grid">
+    <div class="foot-brand"><div class="name">Burruzkale Etxea</div><p data-i18n="footP">Habitaciones turísticas en Orozko, Bizkaia. Naturaleza, confort y trato cercano.</p></div>
+    <div class="foot-col"><h5 data-i18n="footExplora">Explora</h5><a href="#casa" data-i18n="navCasa">La Casa</a><a href="#galeria" data-i18n="navGaleria">Galería</a><a href="#opiniones" data-i18n="navOpiniones">Opiniones</a><a href="#ubicacion" data-i18n="navUbicacion">Ubicación</a></div>
+    <div class="foot-col"><h5 data-i18n="footContacto">Contacto</h5><a href="tel:+34618129255">+34 618 12 92 55</a><a href="tel:+34659062480">+34 659 06 24 80</a><span>Orozko, Bizkaia</span></div>
+  </div>
+  <div class="foot-bottom"><span>© 2026 Burruzkale Etxea · Orozko, Bizkaia</span><span>Propuesta de web · G&amp;G Elcano</span></div>
+</div></footer>
+
+<div class="lightbox" id="lightbox">
+  <span class="close" id="lbClose">×</span>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Anterior">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Siguiente">›</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+<button class="to-top" id="toTop" aria-label="Volver arriba">↑</button>
+<script src="assets/eguzki.js"></script>
+<script>
+(function(){
+  // ---------- Diccionario de idiomas ----------
+  const T={
+    es:{
+      brandSub:`Habitaciones turísticas`,
+      navCasa:`La Casa`,navGaleria:`Galería`,navOpiniones:`Opiniones`,navUbicacion:`Ubicación`,navReservar:`Reservar`,
+      heroH1:`Tu escapada en <em>Orozko</em>`,
+      heroP:`Descansa entre montañas, disfruta del confort y vive la esencia de Orozko.`,
+      ctaDisp:`Consultar disponibilidad`,ctaDescubrir:`Descubrir la casa`,
+      badgeRev:`4.8/5 · 57 opiniones reales`,badgeCentro:`📍 En pleno centro de Orozko`,badgeWa:`💬 Reserva directa por WhatsApp`,scroll:`Desliza<span>↓</span>`,
+      statRating:`Valoración en Google`,statReviews:`Opiniones reales`,
+      casaEye:`La casa`,casaH2:`Tu refugio en Orozko`,
+      casaP1:`Burruzkale Etxea somos unas habitaciones turísticas donde podrás desconectar de verdad. Descanso, encanto y el mejor trato, en el centro de Orozko, a las puertas del Parque Natural de Gorbeia.`,
+      casaP2:`Con una valoración de 4.8★ en Google, nuestros huéspedes destacan la tranquilidad, el entorno natural y el trato cercano. La casa familiar dispone además de un jardín con mesitas para disfrutarlo con el buen tiempo.`,
+      f1:`En el centro de Orozko`,f2:`Habitaciones reformadas`,f3:`Geotermia y suelo radiante`,f4:`Placas solares`,f5:`Amenities ecológicos`,f6:`WiFi gratuito`,f7:`Aparcamiento`,
+      extEye:`El lugar`,extH2:`Un vistazo a Burruzkale Etxea`,extP:`Imágenes reales del alojamiento y su entorno.`,
+      cap1:`La casa de piedra`,cap2:`Habitaciones con encanto`,cap3:`Baños reformados`,cap4:`Tu descanso`,cap5:`Cada detalle`,
+      parEye:`La experiencia`,parH2:`Desconecta entre <em>naturaleza</em>,<br>a tu ritmo y sin prisas`,parBtn:`Quiero vivirlo`,
+      servEye:`Servicios`,servH2:`Todo preparado para ti`,servP:`Cada habitación está equipada para que tu estancia sea cómoda de principio a fin.`,
+      s1t:`TV`,s1d:`Televisión en todas las habitaciones.`,s2t:`Nevera`,s2d:`Nevera en la habitación para tus bebidas.`,
+      s3t:`Hervidor e infusiones`,s3d:`Hervidor de agua con infusiones a tu disposición.`,s4t:`Secador de pelo`,s4d:`Secador en cada habitación.`,
+      s5t:`Amenities ecológicos`,s5d:`Gel de manos, gel de ducha y champú, todo ecológico.`,s6t:`Plancha`,s6d:`Disponible bajo petición.`,
+      s7t:`Cafetera Nespresso`,s7d:`En la zona común, cápsulas para todos los clientes.`,s8t:`Microondas`,s8d:`En la zona común, por si quieres calentar algo.`,
+      s9t:`Jardín`,s9d:`Jardín con mesitas para disfrutar con el buen tiempo.`,
+      sosEye:`Sostenibilidad`,sosH2:`Comprometidos con el medio ambiente`,
+      sosP:`Apostamos por la eficiencia energética y el respeto al entorno. Contamos con un sistema de geotermia mediante suelo radiante y placas solares, que nos permiten ofrecerte el máximo confort durante todo el año reduciendo el impacto ambiental.`,
+      sf1:`Geotermia`,sf2:`Suelo radiante`,sf3:`Placas solares`,sf4:`Eficiencia energética`,
+      galEye:`Galería`,galH2:`Mira cada detalle`,galP:`Fotografías reales de Burruzkale Etxea.`,
+      opEye:`Opiniones`,opH2:`Lo que dicen quienes ya han venido`,opSrc:`en Google · 57 opiniones`,
+      zonaEye:`La zona`,zonaH2:`Qué hacer cerca de <em>la casa</em>`,zonaP:`El valle de Orozko es la puerta de entrada al Gorbeia: rutas, naturaleza y cultura a un paso.`,
+      z1t:`Parque Natural del Gorbeia`,z1d:`Rutas de senderismo para todos los niveles en el parque natural más extenso de Euskadi, con el monte Gorbeia y su mítica cruz.`,z1tag:`A los pies de la casa`,
+      z2t:`Macizo de Itxina`,z2d:`Espectacular laberinto kárstico declarado Biotopo Protegido. El ojo de Atxular es una de las estampas más famosas de Bizkaia.`,z2tag:`Desde Orozko`,
+      z3t:`Salto del Nervión`,z3d:`La cascada más alta de la Península Ibérica (222 m), espectacular tras la lluvia. Mirador y rutas por el cañón de Delika y Monte Santiago.`,z3tag:`~30 min en coche`,
+      z4t:`Valle de Orozko`,z4d:`Pasea por sus barrios rurales, caseríos y ermitas, y acércate al museo etnográfico del valle para conocer su historia.`,z4tag:`Estás en él`,
+      z5t:`Bilbao y alrededores`,z5d:`Museo Guggenheim, Casco Viejo y toda la oferta de la capital vizcaína a media hora en coche. Vitoria-Gasteiz también muy cerca.`,z5tag:`~20 min en coche`,
+      z6t:`Costa de Bizkaia`,z6d:`Las playas de la costa vizcaína a media hora en coche: combina monte y mar en la misma escapada.`,z6tag:`~30 min en coche`,
+      ubiEye:`Ubicación`,ubiH2:`Naturaleza y comodidad en el corazón de Orozko`,
+      ubiP1:`<strong>Estamos en pleno centro de Orozko</strong>, a pocos pasos de restaurantes, supermercados, farmacia y transporte público (Bizkaibus), a 7 minutos en coche de la estación de tren y a un paso de las principales rutas del Parque Natural de Gorbeia.`,
+      ubiP2:`Queremos que disfrutes de la tranquilidad de un entorno rural sin renunciar a las comodidades del día a día.`,
+      addrLabel:`Dirección:`,ubiBtn:`Abrir en Google Maps`,
+      nosEye:`Sobre nosotros`,nosH2:`Turismo responsable`,nosP:`En Burruzkale Etxea creemos en un turismo responsable. Unimos confort y privacidad con el respeto por la naturaleza gracias a nuestra climatización geotérmica, el suelo radiante y la energía solar. Un refugio donde queremos que te sientas como en casa.`,
+      ciEye:`Llegadas y salidas`,ciH2:`Check-in y check-out`,ciInT:`Llegadas (Check-in)`,ciInP:`Queremos que tu entrada sea rápida y cómoda, por eso contamos con auto check-in. Te enviaremos todas las indicaciones por WhatsApp el mismo día de tu llegada. Y si necesitas ayuda, estaremos encantados de atenderte en los teléfonos: 618 12 92 55 | 659 06 24 80.`,ciOutT:`Salidas (Check-out)`,ciOutP:`Para que todo funcione con comodidad, te pedimos dejar la habitación antes de las 12:00 h del mediodía.`,
+      habEye:`Habitaciones`,habH2:`Elige tu habitación`,habP:`Dos tipos de habitación para que elijas la que mejor se adapta a tu escapada.`,
+      r1tag:`3 disponibles`,r1t:`Habitación Estándar`,r1d:`Habitaciones acogedoras con pared de piedra y vigas de madera, baño privado y todo el equipamiento. Perfectas para una escapada en pareja.`,
+      r2tag:`2 disponibles`,r2t:`Habitación Superior`,r2d:`Nuestras habitaciones más amplias, con más espacio y luz, pared de piedra y vigas. Ideales para disfrutar con la máxima comodidad.`,
+      rfPers:`👥 Hasta 2 personas`,rfBath:`🚿 Baño privado`,rfTv:`📺 TV · 🧊 Nevera`,roomPrice:`Consúltanos<small>según fechas</small>`,btnReservar:`Reservar`,
+      resEye:`Reservas`,resH2:`Reserva tu estancia`,resP:`Cuéntanos tus fechas y te confirmamos disponibilidad sin compromiso. Atendemos personalmente cada solicitud.`,
+      ciTel:`Teléfono`,ciDir:`Dirección`,btnWa:`💬 Reservar por WhatsApp`,
+      formH3:`Reserva tu estancia`,formSub:`Elige tus fechas en el calendario y te confirmamos disponibilidad sin compromiso.`,
+      lblNombre:`Nombre`,phNombre:`Tu nombre`,lblHab:`Habitación`,lblPersonas:`Personas`,
+      optEstandar:`Habitación Estándar`,optSuperior:`Habitación Superior`,optIndif:`Indiferente`,opt1p:`1 persona`,opt2p:`2 personas`,
+      lblTel:`Tu teléfono`,lblMsg:`Mensaje (opcional)`,phMsg:`¿Algún detalle que debamos saber?`,btnSubmit:`Solicitar reserva por WhatsApp`,formNote:`Sin compromiso · Te confirmamos disponibilidad el mismo día`,
+      footP:`Habitaciones turísticas en Orozko, Bizkaia. Naturaleza, confort y trato cercano.`,footExplora:`Explora`,footContacto:`Contacto`,
+      oroEye:`El municipio`,oroH2:`Orozko, valle verde de Bizkaia`,oroP1:`Orozko es un valle tranquilo en el corazón de Bizkaia, atravesado por los ríos Altube y Arnauri y rodeado de montañas, bosques y caseríos. Su casco, donde estamos nosotros, reúne los servicios del pueblo y conserva el encanto de la vida del valle.`,oroP2:`Puerta del Parque Natural de Gorbeia, esconde rincones como la cueva de Supelegor —legendaria por sus brujas y lamias—, la Torre de Aranguren del siglo XVI o el Museo Etnográfico del valle. Naturaleza, patrimonio y tradición vasca a tu alcance.`,
+      _selIn:`Selecciona tu fecha de entrada`,_selPre:`Entrada: `,_selPost:` · elige la salida`,_nS:`noche`,_nP:`noches`,_need:`⚠️ Elige fechas de entrada y salida`,
+      _months:['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
+      _mshort:['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],
+      _dow:['dom','lun','mar','mié','jue','vie','sáb'],_dowhead:['L','M','X','J','V','S','D']
+    },
+    eu:{
+      brandSub:`Logela turistikoak`,
+      navCasa:`Etxea`,navGaleria:`Galeria`,navOpiniones:`Iritziak`,navUbicacion:`Kokapena`,navReservar:`Erreserbatu`,
+      heroH1:`Zure ihesaldia <em>Orozkon</em>`,
+      heroP:`Atseden hartu mendien artean, gozatu erosotasunaz eta bizi Orozkoren funtsa.`,
+      ctaDisp:`Eskuragarritasuna kontsultatu`,ctaDescubrir:`Etxea ezagutu`,
+      badgeRev:`4,8/5 · 57 benetako iritzi`,badgeCentro:`📍 Orozkoren erdi-erdian`,badgeWa:`💬 Erreserba zuzena WhatsApp bidez`,scroll:`Lerratu<span>↓</span>`,
+      statRating:`Google-ko balorazioa`,statReviews:`Benetako iritziak`,
+      casaEye:`Etxea`,casaH2:`Zure aterpea Orozkon`,
+      casaP1:`Burruzkale Etxea logela turistikoak gara, benetan deskonektatu ahal izateko. Atsedena, xarma eta tratu hoberena, Orozkoren erdigunean, Gorbeiako Parke Naturalaren atarian.`,
+      casaP2:`Google-n 4,8★-ko balorazioarekin, gure bezeroek lasaitasuna, ingurune naturala eta tratu hurbila nabarmentzen dituzte. Familia-etxeak lorategi bat ere badu, mahaitxoekin, eguraldi onarekin gozatzeko.`,
+      f1:`Orozkoren erdigunean`,f2:`Logela berrituak`,f3:`Geotermia eta lurzoru erradiatzailea`,f4:`Eguzki-plakak`,f5:`Amenity ekologikoak`,f6:`Doako WiFi-a`,f7:`Aparkalekua`,
+      extEye:`Tokia`,extH2:`Burruzkale Etxeari begirada bat`,extP:`Ostatuaren eta inguruaren benetako irudiak.`,
+      cap1:`Harrizko etxea`,cap2:`Xarmadun logelak`,cap3:`Komun berrituak`,cap4:`Zure atsedena`,cap5:`Xehetasun bakoitza`,
+      parEye:`Esperientzia`,parH2:`Deskonektatu <em>naturaren</em> erdian,<br>zure erritmoan eta presarik gabe`,parBtn:`Bizi nahi dut`,
+      servEye:`Zerbitzuak`,servH2:`Dena prest zuretzat`,servP:`Logela bakoitza ekipatuta dago zure egonaldia hasieratik amaierara erosoa izan dadin.`,
+      s1t:`TB`,s1d:`Telebista logela guztietan.`,s2t:`Hozkailua`,s2d:`Hozkailua logelan zure edarientzat.`,
+      s3t:`Ur-berogailua eta infusioak`,s3d:`Ur-berogailua infusioekin zure eskura.`,s4t:`Ile-lehorgailua`,s4d:`Lehorgailua logela bakoitzean.`,
+      s5t:`Amenity ekologikoak`,s5d:`Esku-gela, dutxa-gela eta xanpua, dena ekologikoa.`,s6t:`Lisaburdina`,s6d:`Eskaeraren arabera eskuragarri.`,
+      s7t:`Nespresso kafe-makina`,s7d:`Gune komunean, kapsulak bezero guztientzat.`,s8t:`Mikrouhin-labea`,s8d:`Gune komunean, zerbait berotu nahi baduzu.`,
+      s9t:`Lorategia`,s9d:`Lorategia mahaitxoekin, eguraldi onarekin gozatzeko.`,
+      sosEye:`Jasangarritasuna`,sosH2:`Ingurumenarekin konprometituak`,
+      sosP:`Energia-eraginkortasunaren eta ingurunearekiko errespetuaren alde egiten dugu. Lurzoru erradiatzailearen bidezko geotermia-sistema eta eguzki-plakak ditugu, urte osoan erosotasun handiena eskaintzeko, ingurumen-eragina murriztuz.`,
+      sf1:`Geotermia`,sf2:`Lurzoru erradiatzailea`,sf3:`Eguzki-plakak`,sf4:`Energia-eraginkortasuna`,
+      galEye:`Galeria`,galH2:`Begiratu xehetasun bakoitza`,galP:`Burruzkale Etxearen benetako argazkiak.`,
+      opEye:`Iritziak`,opH2:`Etorri direnek diotena`,opSrc:`Google-n · 57 iritzi`,
+      zonaEye:`Ingurua`,zonaH2:`Zer egin <em>etxetik</em> gertu`,zonaP:`Orozkoko harana Gorbeiarako sarrera da: ibilbideak, natura eta kultura, oso gertu.`,
+      z1t:`Gorbeiako Parke Naturala`,z1d:`Maila guztietako mendi-ibilbideak Euskadiko parke natural zabalenean, Gorbeia mendiarekin eta bere gurutze mitikoarekin.`,z1tag:`Etxearen oinetan`,
+      z2t:`Itxinako mendigunea`,z2d:`Karst-labirinto ikusgarria, Babestutako Biotopo izendatua. Atxulaurreko begia Bizkaiko irudi ezagunenetako bat da.`,z2tag:`Orozkotik`,
+      z3t:`Nerbioiko ur-jauzia`,z3d:`Iberiar penintsulako ur-jauzirik altuena (222 m), ikusgarria euria egin ondoren. Begiratokia eta ibilbideak Delikako arroilan eta Santiago mendian.`,z3tag:`~30 min autoz`,
+      z4t:`Orozkoko harana`,z4d:`Ibili bere auzo, baserri eta ermitetan barrena, eta hurbildu haraneko museo etnografikora bere historia ezagutzeko.`,z4tag:`Bertan zaude`,
+      z5t:`Bilbo eta inguruak`,z5d:`Guggenheim Museoa, Alde Zaharra eta hiriburuaren eskaintza guztia, ordu erdira autoz. Vitoria-Gasteiz ere oso gertu.`,z5tag:`~20 min autoz`,
+      z6t:`Bizkaiko kostaldea`,z6d:`Bizkaiko kostaldeko hondartzak ordu erdira autoz: mendia eta itsasoa ihesaldi berean uztartu.`,z6tag:`~30 min autoz`,
+      ubiEye:`Kokapena`,ubiH2:`Natura eta erosotasuna Orozkoren bihotzean`,
+      ubiP1:`<strong>Orozkoren erdi-erdian gaude</strong>, jatetxe, supermerkatu, farmazia eta garraio publikotik (Bizkaibus) gertu, trenaren geltokitik 7 minutura autoz, eta Gorbeiako Parke Naturaleko ibilbide nagusietatik oso hurbil.`,
+      ubiP2:`Landa-ingurune baten lasaitasunaz gozatzea nahi dugu, eguneroko erosotasunei uko egin gabe.`,
+      addrLabel:`Helbidea:`,ubiBtn:`Google Maps-en ireki`,
+      nosEye:`Guri buruz`,nosH2:`Turismo arduratsua`,nosP:`Burruzkale Etxean turismo arduratsuan sinesten dugu. Erosotasuna eta pribatutasuna naturarekiko errespetuarekin uztartzen ditugu, gure klimatizazio geotermikoari, lurzoru erradiatzaileari eta eguzki-energiari esker. Etxean bezala sentitzea nahi dugun aterpea.`,
+      ciEye:`Sarrerak eta irteerak`,ciH2:`Check-in eta check-out`,ciInT:`Sarrerak (Check-in)`,ciInP:`Zure sarrera azkarra eta erosoa izatea nahi dugu, horregatik auto check-in-a dugu. Argibide guztiak WhatsApp bidez bidaliko dizkizugu zure iristeko egun berean. Eta laguntza behar baduzu, pozik artatuko zaitugu telefono hauetan: 618 12 92 55 | 659 06 24 80.`,ciOutT:`Irteerak (Check-out)`,ciOutP:`Dena erosotasunez funtziona dadin, logela eguerdiko 12:00ak baino lehen uztea eskatzen dizugu.`,
+      habEye:`Logelak`,habH2:`Aukeratu zure logela`,habP:`Bi logela mota, zure ihesaldira ondoen egokitzen dena aukeratzeko.`,
+      r1tag:`3 eskuragarri`,r1t:`Logela Estandarra`,r1d:`Logela atseginak, harrizko hormarekin eta egurrezko habeekin, komun pribatuarekin eta ekipamendu guztiarekin. Bikotearentzako ihesaldi ezin hobea.`,
+      r2tag:`2 eskuragarri`,r2t:`Logela Superiorra`,r2d:`Gure logela zabalenak, leku eta argi gehiagorekin, harrizko horma eta habeekin. Erosotasun handienarekin gozatzeko aproposak.`,
+      rfPers:`👥 2 pertsona arte`,rfBath:`🚿 Komun pribatua`,rfTv:`📺 TB · 🧊 Hozkailua`,roomPrice:`Galdetu<small>dataren arabera</small>`,btnReservar:`Erreserbatu`,
+      resEye:`Erreserbak`,resH2:`Erreserbatu zure egonaldia`,resP:`Esan zure datak eta eskuragarritasuna baieztatuko dizugu, konpromisorik gabe. Eskaera bakoitza pertsonalki artatzen dugu.`,
+      ciTel:`Telefonoa`,ciDir:`Helbidea`,btnWa:`💬 Erreserbatu WhatsApp bidez`,
+      formH3:`Erreserbatu zure egonaldia`,formSub:`Aukeratu zure datak egutegian eta eskuragarritasuna baieztatuko dizugu, konpromisorik gabe.`,
+      lblNombre:`Izena`,phNombre:`Zure izena`,lblHab:`Logela`,lblPersonas:`Pertsonak`,
+      optEstandar:`Logela Estandarra`,optSuperior:`Logela Superiorra`,optIndif:`Berdin dio`,opt1p:`1 pertsona`,opt2p:`2 pertsona`,
+      lblTel:`Zure telefonoa`,lblMsg:`Mezua (aukerakoa)`,phMsg:`Jakin behar dugun xehetasunik?`,btnSubmit:`Eskatu erreserba WhatsApp bidez`,formNote:`Konpromisorik gabe · Egun berean baieztatuko dizugu eskuragarritasuna`,
+      footP:`Logela turistikoak Orozkon, Bizkaian. Natura, erosotasuna eta tratu hurbila.`,footExplora:`Esploratu`,footContacto:`Kontaktua`,
+      oroEye:`Udalerria`,oroH2:`Orozko, Bizkaiko haran berdea`,oroP1:`Orozko Bizkaiaren bihotzean dagoen haran lasaia da, Altube eta Arnauri ibaiek zeharkatua eta mendiz, basoz eta baserriz inguratua. Bere herrigunean —gu hemen gaude— herriko zerbitzuak biltzen dira, haraneko bizimoduaren xarma gordez.`,oroP2:`Gorbeiako Parke Naturalaren atea: Supelegorko kobazuloa —sorginen eta lamien kondairez betea—, XVI. mendeko Arangurengo Dorrea edo haraneko Museo Etnografikoa bezalako txokoak gordetzen ditu. Natura, ondarea eta euskal tradizioa zure eskura.`,
+      _selIn:`Aukeratu sarrera-data`,_selPre:`Sarrera: `,_selPost:` · aukeratu irteera`,_nS:`gau`,_nP:`gau`,_need:`⚠️ Aukeratu sarrera- eta irteera-datak`,
+      _months:['urtarrila','otsaila','martxoa','apirila','maiatza','ekaina','uztaila','abuztua','iraila','urria','azaroa','abendua'],
+      _mshort:['urt','ots','mar','api','mai','eka','uzt','abu','ira','urr','aza','abe'],
+      _dow:['ig','al','ar','az','og','os','la'],_dowhead:['Al','Ar','Az','Og','Os','La','Ig']
+    },
+    en:{
+      brandSub:`Tourist rooms`,
+      navCasa:`The House`,navGaleria:`Gallery`,navOpiniones:`Reviews`,navUbicacion:`Location`,navReservar:`Book`,
+      heroH1:`Your getaway in <em>Orozko</em>`,
+      heroP:`Rest among the mountains, enjoy the comfort and live the essence of Orozko.`,
+      ctaDisp:`Check availability`,ctaDescubrir:`Discover the house`,
+      badgeRev:`4.8/5 · 57 real reviews`,badgeCentro:`📍 Right in the centre of Orozko`,badgeWa:`💬 Direct booking via WhatsApp`,scroll:`Scroll<span>↓</span>`,
+      statRating:`Google rating`,statReviews:`Real reviews`,
+      casaEye:`The house`,casaH2:`Your refuge in Orozko`,
+      casaP1:`At Burruzkale Etxea we're a set of tourist rooms where you can truly disconnect. Rest, charm and the warmest welcome, in the centre of Orozko, at the gateway to the Gorbeia Natural Park.`,
+      casaP2:`With a 4.8★ rating on Google, our guests highlight the peace, the natural surroundings and the warm welcome. The family house also has a garden with tables to enjoy in good weather.`,
+      f1:`In the centre of Orozko`,f2:`Renovated rooms`,f3:`Geothermal underfloor heating`,f4:`Solar panels`,f5:`Eco-friendly amenities`,f6:`Free WiFi`,f7:`Parking`,
+      extEye:`The place`,extH2:`A glimpse of Burruzkale Etxea`,extP:`Real photos of the accommodation and its surroundings.`,
+      cap1:`The stone house`,cap2:`Charming rooms`,cap3:`Renovated bathrooms`,cap4:`Your rest`,cap5:`Every detail`,
+      parEye:`The experience`,parH2:`Disconnect surrounded by <em>nature</em>,<br>at your own pace, no rush`,parBtn:`I want to live it`,
+      servEye:`Services`,servH2:`Everything ready for you`,servP:`Every room is equipped so your stay is comfortable from start to finish.`,
+      s1t:`TV`,s1d:`Television in every room.`,s2t:`Fridge`,s2d:`In-room fridge for your drinks.`,
+      s3t:`Kettle & teas`,s3d:`Water kettle with teas at your disposal.`,s4t:`Hair dryer`,s4d:`Dryer in every room.`,
+      s5t:`Eco amenities`,s5d:`Hand gel, shower gel and shampoo, all eco-friendly.`,s6t:`Iron`,s6d:`Available on request.`,
+      s7t:`Nespresso machine`,s7d:`In the common area, capsules for all guests.`,s8t:`Microwave`,s8d:`In the common area, in case you want to heat something.`,
+      s9t:`Garden`,s9d:`Garden with tables to enjoy in good weather.`,
+      sosEye:`Sustainability`,sosH2:`Committed to the environment`,
+      sosP:`We're committed to energy efficiency and respect for the environment. We have a geothermal system with underfloor heating and solar panels, letting us offer maximum comfort all year round while reducing our environmental impact.`,
+      sf1:`Geothermal energy`,sf2:`Underfloor heating`,sf3:`Solar panels`,sf4:`Energy efficiency`,
+      galEye:`Gallery`,galH2:`See every detail`,galP:`Real photos of Burruzkale Etxea.`,
+      opEye:`Reviews`,opH2:`What past guests say`,opSrc:`on Google · 57 reviews`,
+      zonaEye:`The area`,zonaH2:`What to do near <em>the house</em>`,zonaP:`The Orozko valley is the gateway to Gorbeia: trails, nature and culture, all close by.`,
+      z1t:`Gorbeia Natural Park`,z1d:`Hiking trails for all levels in the largest natural park in the Basque Country, with Mount Gorbeia and its legendary cross.`,z1tag:`At the doorstep`,
+      z2t:`Itxina Massif`,z2d:`A spectacular karst labyrinth declared a Protected Biotope. The Atxular's Eye is one of Bizkaia's most famous sights.`,z2tag:`From Orozko`,
+      z3t:`Nervión Waterfall`,z3d:`The highest waterfall in the Iberian Peninsula (222 m), spectacular after rain. Viewpoint and trails through the Delika canyon and Monte Santiago.`,z3tag:`~30 min by car`,
+      z4t:`Orozko Valley`,z4d:`Stroll through its rural neighbourhoods, farmhouses and hermitages, and visit the valley's ethnographic museum to learn its history.`,z4tag:`You're in it`,
+      z5t:`Bilbao and surroundings`,z5d:`The Guggenheim Museum, the Old Town and everything the Biscayan capital offers, half an hour away by car. Vitoria-Gasteiz is also very close.`,z5tag:`~20 min by car`,
+      z6t:`Bizkaia coast`,z6d:`The beaches of the Biscay coast just half an hour away by car: combine mountain and sea in the same trip.`,z6tag:`~30 min by car`,
+      ubiEye:`Location`,ubiH2:`Nature and comfort in the heart of Orozko`,
+      ubiP1:`<strong>We're right in the centre of Orozko</strong>, just steps from restaurants, supermarkets, a pharmacy and public transport (Bizkaibus), a 7-minute drive from the train station and a stone's throw from the main trails of the Gorbeia Natural Park.`,
+      ubiP2:`We want you to enjoy the peace of a rural setting without giving up the comforts of everyday life.`,
+      addrLabel:`Address:`,ubiBtn:`Open in Google Maps`,
+      nosEye:`About us`,nosH2:`Responsible tourism`,nosP:`At Burruzkale Etxea we believe in responsible tourism. We combine comfort and privacy with respect for nature thanks to our geothermal climate control, underfloor heating and solar energy. A refuge where we want you to feel at home.`,
+      ciEye:`Arrivals & departures`,ciH2:`Check-in and check-out`,ciInT:`Arrivals (Check-in)`,ciInP:`We want your arrival to be quick and easy, so we offer self check-in. We'll send you all the instructions by WhatsApp on the day you arrive. And if you need help, we'll be glad to assist you on: 618 12 92 55 | 659 06 24 80.`,ciOutT:`Departures (Check-out)`,ciOutP:`So everything runs smoothly, we ask you to leave the room before 12:00 noon.`,
+      habEye:`Rooms`,habH2:`Choose your room`,habP:`Two room types so you can choose the one that best suits your getaway.`,
+      r1tag:`3 available`,r1t:`Standard Room`,r1d:`Cosy rooms with stone walls and wooden beams, private bathroom and full equipment. Perfect for a couple's getaway.`,
+      r2tag:`2 available`,r2t:`Superior Room`,r2d:`Our largest rooms, with more space and light, stone walls and beams. Ideal for enjoying maximum comfort.`,
+      rfPers:`👥 Up to 2 guests`,rfBath:`🚿 Private bathroom`,rfTv:`📺 TV · 🧊 Fridge`,roomPrice:`Ask us<small>by dates</small>`,btnReservar:`Book`,
+      resEye:`Booking`,resH2:`Book your stay`,resP:`Tell us your dates and we'll confirm availability with no obligation. We handle every request personally.`,
+      ciTel:`Phone`,ciDir:`Address`,btnWa:`💬 Book via WhatsApp`,
+      formH3:`Book your stay`,formSub:`Pick your dates on the calendar and we'll confirm availability with no obligation.`,
+      lblNombre:`Name`,phNombre:`Your name`,lblHab:`Room`,lblPersonas:`Guests`,
+      optEstandar:`Standard Room`,optSuperior:`Superior Room`,optIndif:`No preference`,opt1p:`1 guest`,opt2p:`2 guests`,
+      lblTel:`Your phone`,lblMsg:`Message (optional)`,phMsg:`Anything we should know?`,btnSubmit:`Request booking via WhatsApp`,formNote:`No obligation · We confirm availability the same day`,
+      footP:`Tourist rooms in Orozko, Bizkaia. Nature, comfort and a warm welcome.`,footExplora:`Explore`,footContacto:`Contact`,
+      oroEye:`The municipality`,oroH2:`Orozko, the green valley of Bizkaia`,oroP1:`Orozko is a peaceful valley in the heart of Bizkaia, crossed by the Altube and Arnauri rivers and surrounded by mountains, woods and farmhouses. Its town centre —where we are— brings together the village's services while keeping the charm of valley life.`,oroP2:`Gateway to the Gorbeia Natural Park, it hides spots like the Supelegor cave —legendary for its witches and lamias—, the 16th-century Aranguren Tower and the valley's Ethnographic Museum. Nature, heritage and Basque tradition within reach.`,
+      _selIn:`Select your check-in date`,_selPre:`Check-in: `,_selPost:` · choose check-out`,_nS:`night`,_nP:`nights`,_need:`⚠️ Choose check-in and check-out dates`,
+      _months:['January','February','March','April','May','June','July','August','September','October','November','December'],
+      _mshort:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      _dow:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],_dowhead:['M','T','W','T','F','S','S']
+    }
+  };
+
+  let LANG=(localStorage.getItem('bk_lang')||'').toLowerCase();
+  if(!T[LANG])LANG='es';
+
+  function applyStatic(l){
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{const v=T[l][el.getAttribute('data-i18n')];if(v!=null)el.innerHTML=v;});
+    document.querySelectorAll('[data-i18n-ph]').forEach(el=>{const v=T[l][el.getAttribute('data-i18n-ph')];if(v!=null)el.placeholder=v;});
+    document.querySelectorAll('#langs button').forEach(b=>b.classList.toggle('on',b.getAttribute('data-lang')===l));
+  }
+
+  // ---------- Calendario ----------
+  const grid=document.getElementById('bkGrid');
+  const titleEl=document.getElementById('bkTitle'),infoEl=document.getElementById('bkInfo'),
+        nightsEl=document.getElementById('bkNights'),prevBtn=document.getElementById('bkPrev'),
+        nextBtn=document.getElementById('bkNext'),entIn=document.getElementById('entrada'),
+        salIn=document.getElementById('salida'),dowHead=document.getElementById('bkDow');
+  const today=new Date();today.setHours(0,0,0,0);
+  let view=new Date(today.getFullYear(),today.getMonth(),1);
+  let checkIn=null,checkOut=null;
+  const L=()=>T[LANG];
+  const iso=d=>`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+  const pretty=d=>`${L()._dow[d.getDay()]} ${d.getDate()} ${L()._mshort[d.getMonth()]}`;
+  const same=(a,b)=>a&&b&&a.getTime()===b.getTime();
+
+  function renderDow(){if(dowHead)dowHead.innerHTML=L()._dowhead.map(x=>`<span>${x}</span>`).join('');}
+  function render(){
+    if(!grid)return;
+    titleEl.textContent=`${L()._months[view.getMonth()]} ${view.getFullYear()}`;
+    prevBtn.disabled=(view.getFullYear()===today.getFullYear()&&view.getMonth()===today.getMonth());
+    grid.innerHTML='';
+    const first=new Date(view.getFullYear(),view.getMonth(),1);
+    const offset=(first.getDay()+6)%7;
+    const daysInMonth=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
+    for(let i=0;i<offset;i++){const e=document.createElement('div');e.className='bk-day bk-empty';grid.appendChild(e);}
+    for(let d=1;d<=daysInMonth;d++){
+      const cell=document.createElement('div');cell.className='bk-day';cell.textContent=d;
+      const date=new Date(view.getFullYear(),view.getMonth(),d);
+      if(date<today){cell.classList.add('bk-dis');}
+      else{
+        if(same(date,checkIn))cell.classList.add('bk-in');
+        if(same(date,checkOut))cell.classList.add('bk-out');
+        if(checkIn&&checkOut&&date>checkIn&&date<checkOut)cell.classList.add('bk-range');
+        cell.addEventListener('click',()=>pick(date));
+      }
+      grid.appendChild(cell);
+    }
+  }
+  function pick(date){
+    if(!checkIn||(checkIn&&checkOut)){checkIn=date;checkOut=null;}
+    else if(date>checkIn){checkOut=date;}
+    else{checkIn=date;checkOut=null;}
+    sync();render();
+  }
+  function sync(){
+    if(!infoEl)return;
+    if(checkIn&&checkOut){
+      const n=Math.round((checkOut-checkIn)/86400000);
+      infoEl.textContent=`${pretty(checkIn)} → ${pretty(checkOut)}`;
+      nightsEl.textContent=n+' '+(n===1?L()._nS:L()._nP);
+      entIn.value=iso(checkIn);salIn.value=iso(checkOut);
+    }else if(checkIn){
+      infoEl.textContent=`${L()._selPre}${pretty(checkIn)}${L()._selPost}`;
+      nightsEl.textContent='';entIn.value=iso(checkIn);salIn.value='';
+    }else{
+      infoEl.textContent=L()._selIn;
+      nightsEl.textContent='';entIn.value='';salIn.value='';
+    }
+  }
+  if(prevBtn)prevBtn.addEventListener('click',()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);render();});
+  if(nextBtn)nextBtn.addEventListener('click',()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);render();});
+
+  const form=document.getElementById('bookForm');
+  if(form)form.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(!checkIn||!checkOut){infoEl.textContent=L()._need;return;}
+    const wa=form.dataset.wa,name=form.dataset.name||'el alojamiento';
+    const g=id=>{const el=document.getElementById(id);return el?el.value:'';};
+    const n=Math.round((checkOut-checkIn)/86400000);
+    let t=`Hola! Quiero reservar en ${name}.%0A%0A`+
+      `👤 ${g('nombre')||'—'}%0A`+
+      `📅 Entrada: ${iso(checkIn)}%0A`+
+      `📅 Salida: ${iso(checkOut)}%0A`+
+      `🌙 Noches: ${n}%0A`+
+      `🛏️ Habitación: ${g('habitacion')}%0A`+
+      `👥 Personas: ${g('personas')}%0A`+
+      `📞 Tel: ${g('tel')||'—'}`;
+    if(g('msg'))t+=`%0A📝 ${g('msg')}`;
+    window.open(`https://wa.me/${wa}?text=${t}`,'_blank');
+  });
+
+  document.querySelectorAll('.room-btn').forEach(b=>b.addEventListener('click',()=>{
+    const sel=document.getElementById('habitacion');
+    if(sel)sel.selectedIndex=parseInt(b.getAttribute('data-idx'),10)||0;
+    const r=document.getElementById('reservar');
+    if(r)r.scrollIntoView({behavior:'smooth'});
+  }));
+
+  // ---------- Carrusel de opiniones ----------
+  const track=document.getElementById('reviewsTrack'),rp=document.getElementById('revPrev'),rn=document.getElementById('revNext');
+  if(track&&rp&&rn){
+    const upd=()=>{const ov=(track.scrollWidth-track.clientWidth>8)&&window.innerWidth>700;rp.style.display=rn.style.display=ov?'grid':'none';};
+    rp.addEventListener('click',()=>track.scrollBy({left:-380,behavior:'smooth'}));
+    rn.addEventListener('click',()=>track.scrollBy({left:380,behavior:'smooth'}));
+    window.addEventListener('resize',upd);upd();
+  }
+
+  // ---------- Cambio de idioma ----------
+  function setLang(l){if(!T[l])return;LANG=l;try{localStorage.setItem('bk_lang',l);}catch(e){}applyStatic(l);renderDow();render();sync();}
+  document.querySelectorAll('#langs button').forEach(b=>b.addEventListener('click',()=>setLang(b.getAttribute('data-lang'))));
+
+  // ---------- Init ----------
+  applyStatic(LANG);renderDow();render();sync();
+})();
+</script>
+<script>
+/* Cierre del loader — independiente, a prueba de errores del resto del JS */
+(function(){
+  var l=document.getElementById('loader');if(!l)return;
+  var hide=function(){l.classList.add('done');setTimeout(function(){if(l&&l.parentNode)l.style.display='none';},800);};
+  if(document.readyState==='complete'){hide();}
+  else{window.addEventListener('load',hide);}
+  /* Fallback duro: pase lo que pase, fuera el loader a los 3,5s */
+  setTimeout(hide,3500);
+})();
+</script>
+</body>
+</html>
