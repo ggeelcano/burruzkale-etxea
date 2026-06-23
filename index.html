@@ -760,6 +760,20 @@ header.scrolled .langs button{color:var(--green,#2f3d2f)}
     const wa=form.dataset.wa,name=form.dataset.name||'el alojamiento';
     const g=id=>{const el=document.getElementById(id);return el?el.value:'';};
     const n=Math.round((checkOut-checkIn)/86400000);
+    // Guarda la reserva en el CRM (best-effort; no bloquea la apertura de WhatsApp)
+    const isoYmd=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    try{
+      fetch('https://gg-reservas-erp.josugarciandia.workers.dev/api/reservas',{
+        method:'POST',headers:{'Content-Type':'application/json'},mode:'cors',
+        body:JSON.stringify({
+          restaurante:'burruzkale-etxea',restaurante_nombre:'Burruzkale Etxea',origen:'web',
+          nombre:g('nombre'),telefono:g('tel'),
+          fecha:isoYmd(checkIn),salida:isoYmd(checkOut),noches:n,
+          habitacion:g('habitacion'),comensales:parseInt(g('personas'),10)||'',
+          notas:g('msg'),estado:'pendiente'
+        })
+      }).catch(()=>{});
+    }catch(_){}
     let t=`Hola! Quiero reservar en ${name}.%0A%0A`+
       `👤 ${g('nombre')||'—'}%0A`+
       `📅 Entrada: ${iso(checkIn)}%0A`+

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM Reservas · Burruzkale Etxea</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#2f3d2f">
+<link rel="icon" href="../img/logo-mark.png">
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+:root{--green:#2f3d2f;--green-2:#43583f;--moss:#6b7d5a;--gold:#b08d57;--gold-light:#c9a877;--cream:#f6f1e7;--cream-2:#efe7d6;--ink:#26241f;--muted:#6f6a5f;--white:#fff;--amber:#b8893f;--red:#b14a2e;--bosque:#3f7a4a;--line:#e7ddc9}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.brand b{font-family:'Outfit',sans-serif}
+
+/* Login gate */
+.gate{position:fixed;inset:0;background:var(--green);display:flex;align-items:center;justify-content:center;z-index:200;padding:24px}
+.gate.hide{display:none}
+.gate-box{background:#fff;border-radius:18px;padding:38px 34px;max-width:380px;width:100%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.3)}
+.gate-box img{height:60px;margin-bottom:14px}
+.gate-box h1{font-size:1.4rem;color:var(--green);margin-bottom:4px}
+.gate-box p{color:var(--muted);font-size:.9rem;margin-bottom:22px}
+.gate-box input{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:10px;font-size:1rem;font-family:inherit;outline:none;margin-bottom:12px}
+.gate-box input:focus{border-color:var(--gold)}
+.gate-box button{width:100%;padding:13px;background:var(--green);color:#fff;border:0;border-radius:10px;font-weight:700;font-size:.95rem;cursor:pointer;font-family:inherit}
+.gate-box button:hover{background:var(--green-2)}
+.gate-err{color:var(--red);font-size:.85rem;margin-top:10px;min-height:18px}
+
+/* Topbar */
+.topbar{background:var(--green);color:#fff;padding:14px 26px;display:flex;justify-content:space-between;align-items:center;gap:16px;position:sticky;top:0;z-index:50}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:38px;width:38px;border-radius:50%;background:#fff;padding:3px;object-fit:contain}
+.brand b{font-size:1.1rem;font-weight:800;display:block;line-height:1.1}
+.brand small{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-light)}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.badge{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:5px 12px;border-radius:30px;border:1px solid var(--gold-light);color:var(--gold-light)}
+.badge.on{color:#bfe6c4;border-color:#bfe6c4}
+.tb-btn{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;padding:7px 14px;border-radius:8px;font-size:.8rem;cursor:pointer;font-family:inherit;font-weight:600}
+.tb-btn:hover{background:rgba(255,255,255,.12)}
+
+main{max-width:1180px;margin:0 auto;padding:28px 24px 70px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:24px;flex-wrap:wrap}
+.head h2{font-size:1.7rem;color:var(--green)}
+.head p{color:var(--muted);font-size:.88rem;margin-top:2px}
+.head-actions{display:flex;gap:10px}
+.btn{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:600;font-size:.85rem;cursor:pointer;font-family:inherit}
+.btn:hover{border-color:var(--gold)}
+.btn-primary{background:var(--green);border-color:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-2)}
+.btn-wa{background:#25D366;border-color:#25D366;color:#fff}
+.btn-danger:hover{border-color:var(--red);color:var(--red)}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:var(--gold)}
+.kpi.g::before{background:var(--bosque)}.kpi.a::before{background:var(--amber)}.kpi.r::before{background:var(--red)}
+.kpi-label{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px}
+.kpi-val{font-family:'Outfit';font-size:2.1rem;font-weight:800;color:var(--green);line-height:1}
+.kpi.g .kpi-val{color:var(--bosque)}.kpi.a .kpi-val{color:var(--amber)}.kpi.r .kpi-val{color:var(--red)}
+.kpi-sub{font-size:.74rem;color:var(--muted);margin-top:5px}
+
+/* Filters */
+.filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.filter{padding:8px 15px;border:1px solid var(--line);background:#fff;color:var(--muted);font-size:.8rem;font-weight:600;cursor:pointer;border-radius:8px;font-family:inherit}
+.filter.active{background:var(--green);border-color:var(--green);color:#fff}
+.search{flex:1;min-width:200px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-family:inherit;font-size:.88rem;outline:none}
+.search:focus{border-color:var(--gold)}
+
+/* Table */
+.table-wrap{background:#fff;border:1px solid var(--line);border-radius:14px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+thead{background:var(--cream-2)}
+th{text-align:left;padding:13px 16px;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-2);font-weight:700;white-space:nowrap}
+td{padding:13px 16px;border-top:1px solid var(--line);vertical-align:middle}
+tbody tr{cursor:pointer;transition:.12s}
+tbody tr:hover{background:var(--cream)}
+.c-name{font-weight:700;color:var(--ink)}
+.c-name small{display:block;color:var(--muted);font-weight:400;font-size:.78rem;margin-top:2px}
+.c-when{font-weight:600;color:var(--green)}
+.c-when small{display:block;color:var(--muted);font-weight:400;font-size:.74rem;margin-top:2px}
+.c-pax{font-family:'Outfit';font-weight:800;color:var(--gold);font-size:1.15rem}
+.pill{display:inline-block;padding:4px 11px;border-radius:30px;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
+.p-pendiente{color:var(--amber);border-color:#e3cd9b;background:#faf3e4}
+.p-confirmada{color:var(--bosque);border-color:#bfe0c5;background:#eef7ef}
+.p-cancelada{color:var(--red);border-color:#e6c3b8;background:#fbeee9}
+.empty{padding:70px 20px;text-align:center;color:var(--muted)}
+.empty h3{color:var(--green);font-size:1.4rem;margin-bottom:8px}
+
+/* Detail drawer */
+.drawer-bg{position:fixed;inset:0;background:rgba(38,36,31,.55);backdrop-filter:blur(3px);z-index:99;opacity:0;visibility:hidden;transition:.2s}
+.drawer-bg.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;height:100vh;width:min(460px,94vw);background:#fff;z-index:100;transform:translateX(100%);transition:.28s ease;display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.drawer-head{background:var(--green);color:#fff;padding:22px 24px}
+.drawer-head h2{font-size:1.3rem}
+.drawer-head p{font-size:.72rem;letter-spacing:.1em;opacity:.8;margin-top:4px}
+.drawer-body{flex:1;overflow-y:auto;padding:22px 24px}
+.d-row{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.d-row b{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.d-row span{text-align:right;font-weight:600;color:var(--ink)}
+.d-row span a{color:var(--green-2);text-decoration:underline}
+.drawer-actions{padding:18px 24px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px}
+.x{background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px;float:right}
+
+/* Modal manual */
+.modal-bg{position:fixed;inset:0;background:rgba(38,36,31,.6);backdrop-filter:blur(3px);z-index:110;opacity:0;visibility:hidden;transition:.2s}
+.modal-bg.open{opacity:1;visibility:visible}
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.98);background:#fff;border-radius:16px;width:min(500px,94vw);max-height:92vh;overflow-y:auto;z-index:111;opacity:0;visibility:hidden;transition:.22s}
+.modal.open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
+.modal-head{background:var(--green);color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:center}
+.modal-head h3{font-size:1.2rem}
+.modal-body{padding:22px 24px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.f-row.single{grid-template-columns:1fr}
+.f{display:flex;flex-direction:column;gap:5px}
+.f label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.f input,.f select,.f textarea{padding:11px 13px;border:1.5px solid var(--line);border-radius:9px;font-family:inherit;font-size:.92rem;outline:none;background:#fff;color:var(--ink)}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--gold)}
+.f textarea{resize:vertical;min-height:60px}
+
+@media(max-width:780px){.kpis{grid-template-columns:repeat(2,1fr)}.f-row{grid-template-columns:1fr}.head{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<!-- Gate de acceso -->
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <img src="../img/logo-mark.png" alt="Burruzkale Etxea">
+    <h1>CRM Reservas</h1>
+    <p>Burruzkale Etxea · acceso privado</p>
+    <input type="password" id="gate-pass" placeholder="Contraseña" autocomplete="current-password">
+    <button id="gate-btn">Entrar</button>
+    <div class="gate-err" id="gate-err"></div>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="brand">
+    <img src="../img/logo-mark.png" alt="">
+    <div><b>Burruzkale Etxea</b><small>CRM Reservas</small></div>
+  </div>
+  <div class="topbar-right">
+    <span class="badge" id="conn">Conectando…</span>
+    <button class="tb-btn" id="logout">Salir</button>
+  </div>
+</div>
+
+<main>
+  <div class="head">
+    <div>
+      <h2>Reservas</h2>
+      <p id="updated">Sincronizado con la web de Burruzkale Etxea</p>
+    </div>
+    <div class="head-actions">
+      <button class="btn btn-primary" id="btn-new">+ Reserva manual</button>
+      <button class="btn" id="btn-refresh">Actualizar</button>
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-label">Próximas entradas</div><div class="kpi-val" id="k-prox">0</div><div class="kpi-sub">de hoy en adelante</div></div>
+    <div class="kpi a"><div class="kpi-label">Pendientes</div><div class="kpi-val" id="k-pen">0</div><div class="kpi-sub">esperan confirmación</div></div>
+    <div class="kpi g"><div class="kpi-label">Confirmadas</div><div class="kpi-val" id="k-conf">0</div><div class="kpi-sub">listas</div></div>
+    <div class="kpi"><div class="kpi-label">Noches (30 días)</div><div class="kpi-val" id="k-noches">0</div><div class="kpi-sub">próximo mes</div></div>
+  </div>
+
+  <div class="filters">
+    <button class="filter active" data-f="proximas">Próximas</button>
+    <button class="filter" data-f="todas">Todas</button>
+    <button class="filter" data-f="pendiente">Pendientes</button>
+    <button class="filter" data-f="confirmada">Confirmadas</button>
+    <button class="filter" data-f="cancelada">Canceladas</button>
+    <input type="search" class="search" id="search" placeholder="Buscar nombre o teléfono…">
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Cliente</th><th>Entrada → Salida</th><th>Habitación</th><th>Pers.</th><th>Estado</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="empty" id="empty" style="display:none"><h3>Sin reservas</h3><p>Cuando entren reservas desde la web aparecerán aquí.</p></div>
+  </div>
+</main>
+
+<!-- Drawer detalle -->
+<div class="drawer-bg" id="dbg"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <button class="x" id="d-close">×</button>
+    <h2 id="d-name">—</h2>
+    <p id="d-id">—</p>
+  </div>
+  <div class="drawer-body" id="d-body"></div>
+  <div class="drawer-actions">
+    <button class="btn btn-wa" id="d-wa">💬 Confirmar por WhatsApp</button>
+    <button class="btn btn-primary" data-set="confirmada">Confirmar</button>
+    <button class="btn" data-set="pendiente">Pendiente</button>
+    <button class="btn btn-danger" data-set="cancelada">Cancelar</button>
+    <button class="btn btn-danger" id="d-del">Borrar</button>
+  </div>
+</aside>
+
+<!-- Modal reserva manual -->
+<div class="modal-bg" id="mbg"></div>
+<div class="modal" id="modal">
+  <div class="modal-head"><h3>Reserva manual</h3><button class="x" id="m-close" style="float:none">×</button></div>
+  <div class="modal-body">
+    <form id="mform">
+      <div class="f-row single"><div class="f"><label>Nombre</label><input name="nombre" required placeholder="Nombre del cliente"></div></div>
+      <div class="f-row">
+        <div class="f"><label>Entrada</label><input name="fecha" type="date" required></div>
+        <div class="f"><label>Salida</label><input name="salida" type="date" required></div>
+      </div>
+      <div class="f-row">
+        <div class="f"><label>Habitación</label><select name="habitacion"><option>Habitación Estándar</option><option>Habitación Superior</option><option>Indiferente</option></select></div>
+        <div class="f"><label>Personas</label><select name="comensales"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select></div>
+      </div>
+      <div class="f-row single"><div class="f"><label>Teléfono</label><input name="telefono" type="tel" placeholder="6XX XXX XXX"></div></div>
+      <div class="f-row single"><div class="f"><label>Notas</label><textarea name="notas" placeholder="Detalles, peticiones…"></textarea></div></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;padding:14px;margin-top:4px">Guardar reserva</button>
+    </form>
+  </div>
+</div>
+
+<script>
+/* ─────── CONFIG ─────── */
+const ENDPOINT='https://gg-reservas-erp.josugarciandia.workers.dev/api/reservas';
+const FILTRO='burruzkale-etxea';
+const NOMBRE='Burruzkale Etxea';
+const CLAVE='burruzkale2026';   // ← cámbiala aquí cuando quieras
+const SESSKEY='bk_crm_ok';
+
+/* ─────── GATE ─────── */
+const gate=document.getElementById('gate');
+function abrir(){gate.classList.add('hide');init();}
+if(sessionStorage.getItem(SESSKEY)==='1')abrir();
+document.getElementById('gate-btn').addEventListener('click',tryLogin);
+document.getElementById('gate-pass').addEventListener('keydown',e=>{if(e.key==='Enter')tryLogin();});
+function tryLogin(){
+  const v=document.getElementById('gate-pass').value;
+  if(v===CLAVE){sessionStorage.setItem(SESSKEY,'1');abrir();}
+  else document.getElementById('gate-err').textContent='Contraseña incorrecta';
+}
+document.getElementById('logout').addEventListener('click',()=>{sessionStorage.removeItem(SESSKEY);location.reload();});
+
+/* ─────── ESTADO ─────── */
+let DATA=[], state={filter:'proximas',search:'',sel:null};
+const $=id=>document.getElementById(id);
+const esc=s=>(s==null?'':String(s)).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hoy=()=>new Date().toISOString().slice(0,10);
+function fmt(iso){if(!iso)return'—';const d=new Date(iso+'T00:00:00');return d.toLocaleDateString('es-ES',{weekday:'short',day:'2-digit',month:'short'}).replace('.','');}
+function fechaLarga(iso){if(!iso)return'';const d=new Date(iso+'T00:00:00');return d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'});}
+function waNum(t){let n=String(t||'').trim();const p=n.startsWith('+');n=n.replace(/\D/g,'');if(p)return n;if(n.length===9)return'34'+n;return n;}
+function pill(s){const m={pendiente:'Pendiente',confirmada:'Confirmada',cancelada:'Cancelada'};return `<span class="pill p-${s||'pendiente'}">${m[s]||'Pendiente'}</span>`;}
+
+/* ─────── FETCH ─────── */
+function cargar(){
+  $('conn').textContent='Conectando…';$('conn').className='badge';
+  fetch(ENDPOINT+'?restaurante='+FILTRO,{mode:'cors'})
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(d=>{DATA=Array.isArray(d)?d:[];$('conn').textContent='Conectado';$('conn').className='badge on';render();})
+    .catch(()=>{$('conn').textContent='Sin conexión';$('conn').className='badge';render();});
+}
+
+/* ─────── RENDER ─────── */
+function render(){
+  const f=hoy();
+  $('k-prox').textContent=DATA.filter(r=>r.fecha>=f&&r.estado!=='cancelada').length;
+  $('k-pen').textContent=DATA.filter(r=>(!r.estado||r.estado==='pendiente')).length;
+  $('k-conf').textContent=DATA.filter(r=>r.estado==='confirmada').length;
+  const f30=new Date(Date.now()+30*86400000).toISOString().slice(0,10);
+  $('k-noches').textContent=DATA.filter(r=>r.fecha>=f&&r.fecha<=f30&&r.estado!=='cancelada').reduce((s,r)=>s+(parseInt(r.noches)||0),0);
+
+  let list=DATA.slice();
+  if(state.filter==='proximas')list=list.filter(r=>r.fecha>=f&&r.estado!=='cancelada');
+  else if(state.filter==='pendiente')list=list.filter(r=>!r.estado||r.estado==='pendiente');
+  else if(state.filter==='confirmada')list=list.filter(r=>r.estado==='confirmada');
+  else if(state.filter==='cancelada')list=list.filter(r=>r.estado==='cancelada');
+  if(state.search){const q=state.search.toLowerCase();list=list.filter(r=>(r.nombre||'').toLowerCase().includes(q)||(r.telefono||'').includes(q));}
+  list.sort((a,b)=>(a.fecha||'').localeCompare(b.fecha||''));
+
+  const tb=$('tbody');
+  if(!list.length){tb.innerHTML='';$('empty').style.display='block';return;}
+  $('empty').style.display='none';
+  tb.innerHTML=list.map(r=>`<tr data-id="${r.id}">
+    <td class="c-name">${esc(r.nombre||'—')}<small>${esc(r.telefono||'')}</small></td>
+    <td class="c-when">${fmt(r.fecha)} → ${fmt(r.salida)}<small>${r.noches||'?'} noche(s)</small></td>
+    <td>${esc(r.habitacion||'—')}</td>
+    <td><span class="c-pax">${r.comensales||'—'}</span></td>
+    <td>${pill(r.estado)}</td>
+  </tr>`).join('');
+  tb.querySelectorAll('tr').forEach(tr=>tr.addEventListener('click',()=>openDrawer(tr.dataset.id)));
+  $('updated').textContent='Actualizado '+new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'})+' · '+DATA.length+' reservas';
+}
+
+/* ─────── DRAWER ─────── */
+function openDrawer(id){
+  const r=DATA.find(x=>x.id===id);if(!r)return;state.sel=id;
+  $('d-name').textContent=r.nombre||'—';
+  $('d-id').textContent=r.id+' · '+(r.origen||'web');
+  const num=waNum(r.telefono);
+  $('d-body').innerHTML=`
+    <div class="d-row"><b>Estado</b><span>${pill(r.estado)}</span></div>
+    <div class="d-row"><b>Entrada</b><span>${fmt(r.fecha)}</span></div>
+    <div class="d-row"><b>Salida</b><span>${fmt(r.salida)}</span></div>
+    <div class="d-row"><b>Noches</b><span>${r.noches||'—'}</span></div>
+    <div class="d-row"><b>Habitación</b><span>${esc(r.habitacion||'—')}</span></div>
+    <div class="d-row"><b>Personas</b><span>${r.comensales||'—'}</span></div>
+    <div class="d-row"><b>Teléfono</b><span>${r.telefono?`<a href="tel:${esc(r.telefono)}">${esc(r.telefono)}</a>`:'—'}</span></div>
+    <div class="d-row"><b>Email</b><span>${r.email?`<a href="mailto:${esc(r.email)}">${esc(r.email)}</a>`:'—'}</span></div>
+    <div class="d-row"><b>Notas</b><span>${esc(r.notas||'—')}</span></div>
+    <div class="d-row"><b>Recibida</b><span>${r.created_at?new Date(r.created_at).toLocaleString('es-ES'):'—'}</span></div>`;
+  $('d-wa').style.display=num?'':'none';
+  $('drawer').classList.add('open');$('dbg').classList.add('open');
+}
+function closeDrawer(){$('drawer').classList.remove('open');$('dbg').classList.remove('open');state.sel=null;}
+$('d-close').addEventListener('click',closeDrawer);$('dbg').addEventListener('click',closeDrawer);
+
+function setEstado(estado){
+  if(!state.sel)return;const r=DATA.find(x=>x.id===state.sel);if(!r)return;
+  r.estado=estado;render();
+  fetch(ENDPOINT+'/'+r.id,{method:'PATCH',headers:{'Content-Type':'application/json'},mode:'cors',body:JSON.stringify({estado})}).catch(()=>{});
+  closeDrawer();
+}
+document.querySelectorAll('[data-set]').forEach(b=>b.addEventListener('click',()=>setEstado(b.dataset.set)));
+
+$('d-wa').addEventListener('click',()=>{
+  const r=DATA.find(x=>x.id===state.sel);if(!r)return;const num=waNum(r.telefono);if(!num)return;
+  const pax=r.comensales?` para ${r.comensales} personas`:'';
+  const msg=`¡Hola${r.nombre?' '+r.nombre.split(' ')[0]:''}! 👋 Te escribimos desde ${NOMBRE}. Te confirmamos tu reserva${r.fecha?` del ${fechaLarga(r.fecha)}`:''}${r.salida?` al ${fechaLarga(r.salida)}`:''}${pax}. ¡Muchas gracias y te esperamos! 🌿`;
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`,'_blank');
+});
+
+$('d-del').addEventListener('click',()=>{
+  if(!state.sel)return;if(!confirm('¿Borrar esta reserva? No se puede deshacer.'))return;
+  const id=state.sel;DATA=DATA.filter(x=>x.id!==id);render();closeDrawer();
+  fetch(ENDPOINT+'/'+id,{method:'DELETE',mode:'cors'}).catch(()=>{});
+});
+
+/* ─────── FILTROS ─────── */
+document.querySelectorAll('.filter[data-f]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filter[data-f]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');state.filter=b.dataset.f;render();
+}));
+$('search').addEventListener('input',e=>{state.search=e.target.value;render();});
+$('btn-refresh').addEventListener('click',cargar);
+
+/* ─────── MODAL MANUAL ─────── */
+function openModal(){$('modal').classList.add('open');$('mbg').classList.add('open');}
+function closeModal(){$('modal').classList.remove('open');$('mbg').classList.remove('open');}
+$('btn-new').addEventListener('click',openModal);
+$('m-close').addEventListener('click',closeModal);$('mbg').addEventListener('click',closeModal);
+$('mform').addEventListener('submit',e=>{
+  e.preventDefault();
+  const d=Object.fromEntries(new FormData(e.target).entries());
+  if(d.fecha&&d.salida){d.noches=Math.max(1,Math.round((new Date(d.salida)-new Date(d.fecha))/86400000));}
+  const payload={restaurante:FILTRO,restaurante_nombre:NOMBRE,origen:'manual',estado:'confirmada',...d,comensales:parseInt(d.comensales,10)||''};
+  fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},mode:'cors',body:JSON.stringify(payload)})
+    .then(r=>r.json()).then(j=>{DATA.unshift(j);render();}).catch(()=>{});
+  e.target.reset();closeModal();
+});
+
+/* ─────── INIT ─────── */
+function init(){cargar();setInterval(cargar,60000);}
+</script>
+</body>
+</html>
