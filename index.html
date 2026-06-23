@@ -11,9 +11,27 @@
 <meta property="og:title" content="Burruzkale Etxea · Orozko, Bizkaia">
 <meta property="og:description" content="Habitaciones turísticas en Orozko, Bizkaia. 4.8★ en Google.">
 <meta property="og:image" content="https://burruzkaleetxea.com/img/bk-01.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+/* ---- Cumplimiento: mapa bajo consentimiento, banner cookies, aviso form ---- */
+.loc-map{position:relative}
+#locMapFrame{opacity:0;transition:opacity .4s}
+#locMapFrame.on{opacity:1}
+.map-consent{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:26px;background:var(--cream-2,#efe7d6);border-radius:var(--radius,18px);z-index:2}
+.map-consent.hide{display:none}
+.map-consent p{max-width:330px;margin:0;color:var(--ink,#26241f);font-size:.95rem;line-height:1.55}
+.map-consent-alt{font-size:.85rem;color:var(--green-2,#43583f);text-decoration:underline}
+.form-priv{font-size:.78rem;color:#8a857a;margin-top:10px;line-height:1.5}
+.form-priv a{color:var(--green-2,#43583f);text-decoration:underline}
+.foot-legal a{color:var(--gold-light,#c9a877);text-decoration:underline}
+.cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:0 auto;background:#fff;border:1px solid #e7ddc9;border-radius:16px;box-shadow:0 18px 50px -18px rgba(38,36,31,.55);padding:18px 20px;z-index:9999;display:none;font-size:.9rem;color:#33322c}
+.cookie-banner.show{display:block}
+.cookie-banner a{color:var(--green-2,#43583f);text-decoration:underline}
+.cookie-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}
+.ck-btn{border:0;border-radius:10px;padding:10px 20px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.9rem}
+.ck-acc{background:var(--green,#2f3d2f);color:#fff}
+.ck-rej{background:#ece3d6;color:#33322c}
+</style>
 <link rel="stylesheet" href="assets/eguzki.css">
 <script type="application/ld+json">
 {
@@ -375,7 +393,14 @@ header.scrolled .langs button{color:var(--green,#2f3d2f)}
     <p style="margin-top:10px;font-size:.95rem"><strong style="color:var(--gold-light)" data-i18n="addrLabel">Dirección:</strong> Burruzkale Kalea, 10, 48410 Orozko, Bizkaia</p>
     <a href="https://www.google.com/maps/search/?api=1&query=43.1062168,-2.9131166" target="_blank" class="btn btn-primary" style="margin-top:24px" data-i18n="ubiBtn">Abrir en Google Maps</a>
   </div>
-  <div class="loc-map reveal"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=43.1062168,-2.9131166&output=embed"></iframe></div>
+  <div class="loc-map reveal" id="locMap">
+    <div class="map-consent" id="mapConsent">
+      <p data-i18n="mapTxt">Para mostrar el mapa cargamos Google Maps, que usa cookies de Google. ¿Lo cargamos?</p>
+      <button type="button" class="btn btn-primary" id="mapAccept" data-i18n="mapBtn">Cargar mapa de Google</button>
+      <a href="https://www.google.com/maps/search/?api=1&query=43.1062168,-2.9131166" target="_blank" rel="noopener" class="map-consent-alt" data-i18n="mapAlt">o abrir en Google Maps ↗</a>
+    </div>
+    <iframe id="locMapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" data-src="https://www.google.com/maps?q=43.1062168,-2.9131166&output=embed" title="Mapa Burruzkale Etxea"></iframe>
+  </div>
 </div></section>
 
 <section class="pad" id="habitaciones"><div class="wrap">
@@ -460,6 +485,7 @@ header.scrolled .langs button{color:var(--green,#2f3d2f)}
     <div class="field"><label for="msg" data-i18n="lblMsg">Mensaje (opcional)</label><textarea id="msg" rows="2" data-i18n-ph="phMsg" placeholder="¿Algún detalle que debamos saber?"></textarea></div>
     <button type="submit" class="btn btn-primary" data-i18n="btnSubmit">Solicitar reserva por WhatsApp</button>
     <p class="form-note" data-i18n="formNote">Sin compromiso · Te confirmamos disponibilidad el mismo día</p>
+    <p class="form-priv" data-i18n="formPriv">Al enviar, tus datos (nombre y teléfono) se usan únicamente para gestionar tu solicitud de reserva por WhatsApp. Consulta la <a href="politica-privacidad.html">Política de privacidad</a>.</p>
   </form>
 </div></section>
 
@@ -469,7 +495,8 @@ header.scrolled .langs button{color:var(--green,#2f3d2f)}
     <div class="foot-col"><h5 data-i18n="footExplora">Explora</h5><a href="#casa" data-i18n="navCasa">La Casa</a><a href="#galeria" data-i18n="navGaleria">Galería</a><a href="#opiniones" data-i18n="navOpiniones">Opiniones</a><a href="#ubicacion" data-i18n="navUbicacion">Ubicación</a></div>
     <div class="foot-col"><h5 data-i18n="footContacto">Contacto</h5><a href="tel:+34618129255">+34 618 12 92 55</a><a href="tel:+34659062480">+34 659 06 24 80</a><span>Orozko, Bizkaia</span></div>
   </div>
-  <div class="foot-bottom"><span>© 2026 Burruzkale Etxea · Orozko, Bizkaia</span><span><a href="aviso-legal.html" style="color:var(--gold-light);text-decoration:underline" data-i18n="fo_al">Aviso legal</a> · Propuesta de web · G&amp;G Elcano</span></div>
+  <div class="foot-bottom"><span>© 2026 Burruzkale Etxea · Orozko, Bizkaia</span><span class="foot-legal"><a href="aviso-legal.html" data-i18n="fo_al">Aviso legal</a> · <a href="politica-privacidad.html" data-i18n="fo_pp">Política de privacidad</a> · <a href="politica-cookies.html" data-i18n="fo_pc">Política de cookies</a> · <a href="#" data-cookies-config data-i18n="fo_ck">Configurar cookies</a></span></div>
+  <div class="foot-bottom" style="border-top:0;padding-top:0;justify-content:flex-end"><span style="opacity:.6">Propuesta de web · G&amp;G Elcano</span></div>
 </div></footer>
 
 <div class="lightbox" id="lightbox">
@@ -534,7 +561,7 @@ header.scrolled .langs button{color:var(--green,#2f3d2f)}
       lblNombre:`Nombre`,phNombre:`Tu nombre`,lblHab:`Habitación`,lblPersonas:`Personas`,
       optEstandar:`Habitación Estándar`,optSuperior:`Habitación Superior`,optIndif:`Indiferente`,opt1p:`1 persona`,opt2p:`2 personas`,
       lblTel:`Tu teléfono`,lblMsg:`Mensaje (opcional)`,phMsg:`¿Algún detalle que debamos saber?`,btnSubmit:`Solicitar reserva por WhatsApp`,formNote:`Sin compromiso · Te confirmamos disponibilidad el mismo día`,
-      footP:`Habitaciones turísticas en Orozko, Bizkaia. Naturaleza, confort y trato cercano.`,footExplora:`Explora`,footContacto:`Contacto`,fo_al:`Aviso legal`,
+      footP:`Habitaciones turísticas en Orozko, Bizkaia. Naturaleza, confort y trato cercano.`,footExplora:`Explora`,footContacto:`Contacto`,fo_al:`Aviso legal`,fo_pp:`Política de privacidad`,fo_pc:`Política de cookies`,fo_ck:`Configurar cookies`,formPriv:`Al enviar, tus datos (nombre y teléfono) se usan únicamente para gestionar tu solicitud de reserva por WhatsApp. Consulta la <a href="politica-privacidad.html">Política de privacidad</a>.`,mapTxt:`Para mostrar el mapa cargamos Google Maps, que usa cookies de Google. ¿Lo cargamos?`,mapBtn:`Cargar mapa de Google`,mapAlt:`o abrir en Google Maps ↗`,ckTxt:`Usamos cookies técnicas necesarias y, solo si lo aceptas, el mapa de Google. <a href="politica-cookies.html">Más información</a>.`,ckAccept:`Aceptar`,ckReject:`Rechazar`,
       oroEye:`El municipio`,oroH2:`Orozko, valle verde de Bizkaia`,oroP1:`Orozko es un valle tranquilo en el corazón de Bizkaia, atravesado por los ríos Altube y Arnauri y rodeado de montañas, bosques y caseríos. Su casco, donde estamos nosotros, reúne los servicios del pueblo y conserva el encanto de la vida del valle.`,oroP2:`Puerta del Parque Natural de Gorbeia, esconde rincones como la cueva de Supelegor —legendaria por sus brujas y lamias—, la Torre de Aranguren del siglo XVI o el Museo Etnográfico del valle. Naturaleza, patrimonio y tradición vasca a tu alcance.`,
       _selIn:`Selecciona tu fecha de entrada`,_selPre:`Entrada: `,_selPost:` · elige la salida`,_nS:`noche`,_nP:`noches`,_need:`⚠️ Elige fechas de entrada y salida`,
       _months:['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
@@ -590,7 +617,7 @@ header.scrolled .langs button{color:var(--green,#2f3d2f)}
       lblNombre:`Izena`,phNombre:`Zure izena`,lblHab:`Logela`,lblPersonas:`Pertsonak`,
       optEstandar:`Logela Estandarra`,optSuperior:`Logela Superiorra`,optIndif:`Berdin dio`,opt1p:`1 pertsona`,opt2p:`2 pertsona`,
       lblTel:`Zure telefonoa`,lblMsg:`Mezua (aukerakoa)`,phMsg:`Jakin behar dugun xehetasunik?`,btnSubmit:`Eskatu erreserba WhatsApp bidez`,formNote:`Konpromisorik gabe · Egun berean baieztatuko dizugu eskuragarritasuna`,
-      footP:`Logela turistikoak Orozkon, Bizkaian. Natura, erosotasuna eta tratu hurbila.`,footExplora:`Esploratu`,footContacto:`Kontaktua`,fo_al:`Lege oharra`,
+      footP:`Logela turistikoak Orozkon, Bizkaian. Natura, erosotasuna eta tratu hurbila.`,footExplora:`Esploratu`,footContacto:`Kontaktua`,fo_al:`Lege oharra`,fo_pp:`Pribatutasun-politika`,fo_pc:`Cookie-politika`,fo_ck:`Cookieak konfiguratu`,formPriv:`Bidaltzean, zure datuak (izena eta telefonoa) WhatsApp bidezko erreserba-eskaera kudeatzeko soilik erabiltzen dira. Ikus <a href="politica-privacidad.html">Pribatutasun-politika</a>.`,mapTxt:`Mapa erakusteko Google Maps kargatzen dugu, Googleren cookieak erabiltzen dituena. Kargatu?`,mapBtn:`Google Maps kargatu`,mapAlt:`edo Google Maps-en ireki ↗`,ckTxt:`Beharrezko cookie teknikoak erabiltzen ditugu eta, onartzen baduzu soilik, Google Maps. <a href="politica-cookies.html">Informazio gehiago</a>.`,ckAccept:`Onartu`,ckReject:`Ukatu`,
       oroEye:`Udalerria`,oroH2:`Orozko, Bizkaiko haran berdea`,oroP1:`Orozko Bizkaiaren bihotzean dagoen haran lasaia da, Altube eta Arnauri ibaiek zeharkatua eta mendiz, basoz eta baserriz inguratua. Bere herrigunean —gu hemen gaude— herriko zerbitzuak biltzen dira, haraneko bizimoduaren xarma gordez.`,oroP2:`Gorbeiako Parke Naturalaren atea: Supelegorko kobazuloa —sorginen eta lamien kondairez betea—, XVI. mendeko Arangurengo Dorrea edo haraneko Museo Etnografikoa bezalako txokoak gordetzen ditu. Natura, ondarea eta euskal tradizioa zure eskura.`,
       _selIn:`Aukeratu sarrera-data`,_selPre:`Sarrera: `,_selPost:` · aukeratu irteera`,_nS:`gau`,_nP:`gau`,_need:`⚠️ Aukeratu sarrera- eta irteera-datak`,
       _months:['urtarrila','otsaila','martxoa','apirila','maiatza','ekaina','uztaila','abuztua','iraila','urria','azaroa','abendua'],
@@ -646,7 +673,7 @@ header.scrolled .langs button{color:var(--green,#2f3d2f)}
       lblNombre:`Name`,phNombre:`Your name`,lblHab:`Room`,lblPersonas:`Guests`,
       optEstandar:`Standard Room`,optSuperior:`Superior Room`,optIndif:`No preference`,opt1p:`1 guest`,opt2p:`2 guests`,
       lblTel:`Your phone`,lblMsg:`Message (optional)`,phMsg:`Anything we should know?`,btnSubmit:`Request booking via WhatsApp`,formNote:`No obligation · We confirm availability the same day`,
-      footP:`Tourist rooms in Orozko, Bizkaia. Nature, comfort and a warm welcome.`,footExplora:`Explore`,footContacto:`Contact`,fo_al:`Legal notice`,
+      footP:`Tourist rooms in Orozko, Bizkaia. Nature, comfort and a warm welcome.`,footExplora:`Explore`,footContacto:`Contact`,fo_al:`Legal notice`,fo_pp:`Privacy policy`,fo_pc:`Cookie policy`,fo_ck:`Cookie settings`,formPriv:`On submitting, your data (name and phone) is used only to handle your booking request via WhatsApp. See our <a href="politica-privacidad.html">Privacy policy</a>.`,mapTxt:`To show the map we load Google Maps, which uses Google cookies. Load it?`,mapBtn:`Load Google Map`,mapAlt:`or open in Google Maps ↗`,ckTxt:`We use necessary technical cookies and, only if you accept, the Google map. <a href="politica-cookies.html">More info</a>.`,ckAccept:`Accept`,ckReject:`Reject`,
       oroEye:`The municipality`,oroH2:`Orozko, the green valley of Bizkaia`,oroP1:`Orozko is a peaceful valley in the heart of Bizkaia, crossed by the Altube and Arnauri rivers and surrounded by mountains, woods and farmhouses. Its town centre —where we are— brings together the village's services while keeping the charm of valley life.`,oroP2:`Gateway to the Gorbeia Natural Park, it hides spots like the Supelegor cave —legendary for its witches and lamias—, the 16th-century Aranguren Tower and the valley's Ethnographic Museum. Nature, heritage and Basque tradition within reach.`,
       _selIn:`Select your check-in date`,_selPre:`Check-in: `,_selPost:` · choose check-out`,_nS:`night`,_nP:`nights`,_need:`⚠️ Choose check-in and check-out dates`,
       _months:['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -778,6 +805,35 @@ header.scrolled .langs button{color:var(--green,#2f3d2f)}
   else{window.addEventListener('load',hide);}
   /* Fallback duro: pase lo que pase, fuera el loader a los 3,5s */
   setTimeout(hide,3500);
+})();
+</script>
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Cookies">
+  <p data-i18n="ckTxt">Usamos cookies técnicas necesarias y, solo si lo aceptas, el mapa de Google. <a href="politica-cookies.html">Más información</a>.</p>
+  <div class="cookie-actions">
+    <button type="button" class="ck-btn ck-rej" id="ckReject" data-i18n="ckReject">Rechazar</button>
+    <button type="button" class="ck-btn ck-acc" id="ckAccept" data-i18n="ckAccept">Aceptar</button>
+  </div>
+</div>
+<script>
+/* Consentimiento de cookies + carga condicional de Google Maps (art. 22.2 LSSI) */
+(function(){
+  var KEY='bk_cookies';
+  var banner=document.getElementById('cookieBanner');
+  var frame=document.getElementById('locMapFrame');
+  var ph=document.getElementById('mapConsent');
+  function loadMap(){ if(frame&&frame.dataset.src&&!frame.src){frame.src=frame.dataset.src;frame.classList.add('on');} if(ph)ph.classList.add('hide'); }
+  function get(){try{return localStorage.getItem(KEY);}catch(e){return null;}}
+  function set(v){try{localStorage.setItem(KEY,v);}catch(e){}}
+  function show(){if(banner)banner.classList.add('show');}
+  function hide(){if(banner)banner.classList.remove('show');}
+  var st=get();
+  if(st==='accepted'){loadMap();}
+  else if(st!=='rejected'){show();}
+  var a=document.getElementById('ckAccept'),r=document.getElementById('ckReject'),m=document.getElementById('mapAccept');
+  if(a)a.addEventListener('click',function(){set('accepted');hide();loadMap();});
+  if(r)r.addEventListener('click',function(){set('rejected');hide();});
+  if(m)m.addEventListener('click',function(){set('accepted');hide();loadMap();});
+  document.querySelectorAll('[data-cookies-config]').forEach(function(el){el.addEventListener('click',function(e){e.preventDefault();try{localStorage.removeItem(KEY);}catch(_){}show();});});
 })();
 </script>
 </body>
